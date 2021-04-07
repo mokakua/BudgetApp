@@ -21,7 +21,7 @@ bool TransactionManager::loadTransactionsFromFile(string fileName) {
             transaction.setInfo(xmlFile.GetChildData().c_str());
             xmlFile.ResetChildPos();
             xmlFile.FindChildElem("date");
-            transaction.setDate(DateManager::getStructDateFromString(xmlFile.GetChildData()));
+            transaction.setDate(DateManager::getIntDateFromString(xmlFile.GetChildData()));
             xmlFile.ResetChildPos();
             xmlFile.FindChildElem("value");
             transaction.setValue(atof(xmlFile.GetChildData().c_str()));
@@ -50,7 +50,7 @@ void TransactionManager::getTransaction() {
     Transaction transaction;
     transaction.setInfo(askForInfo());
     transaction.setValue(askForValue());
-    transaction.setDate(DateManager::getStructDateFromString(askForDate()));
+    transaction.setDate(DateManager::getIntDateFromString(askForDate()));
     transactions.push_back(transaction);
 
 }

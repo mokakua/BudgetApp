@@ -1,6 +1,5 @@
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
-#include <time.h>
 #include <iostream>
 
 using namespace std;
@@ -9,7 +8,7 @@ class Transaction {
 
     string info;
     int userId;
-    struct tm date;
+    int date;
     double value;
 
 public:
@@ -20,12 +19,12 @@ public:
 
     void setInfo (string info);
     void setUserId (int id);
-    void setDate (struct tm date);
+    void setDate (int date);
     void setValue (double value);
 
     string getInfo();
     int getUserId();
-    struct tm getDate();
+    int getDate();
     double getValue();
 
 };

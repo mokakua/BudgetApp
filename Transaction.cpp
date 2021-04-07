@@ -10,7 +10,7 @@
     void Transaction::setUserId(int userId){
     this->userId = userId;
     }
-    void Transaction::setDate (struct tm date){
+    void Transaction::setDate (int date){
     this->date = date;
     }
     void Transaction::setValue (double value){
@@ -24,7 +24,7 @@
     int Transaction::getUserId(){
     return this->userId;
     }
-    struct tm Transaction::getDate(){
+    int Transaction::getDate(){
     return this->date;
     }
     double Transaction::getValue(){
