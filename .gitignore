@@ -1,1 +1,6 @@
 /Plany
+/bin
+/obj
+*.depend
+*.layout
+*.cbp
