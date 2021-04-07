@@ -1,0 +1,20 @@
+<DATA>
+<Transaction>
+<userId>1</userId>
+<info>Shopping</info>
+<date>2000-01-01</date>
+<value>156.50</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<info>Salary</info>
+<date>2015-13-06</date>
+<value>2500.00</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<info>Pub with friends</info>
+<date>2021-31-03</date>
+<value>199.99</value>
+</Transaction>
+</DATA>
