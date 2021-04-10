@@ -3,13 +3,43 @@
 #include "Transaction.h"
 #include "TransactionManager.h"
 #include "DateManager.h"
+#include "User.h"
+#include "UserManager.h"
+#include "XMLFile.h"
+#include "UsersFile.h"
 #include "time.h"
+
 
 
 using namespace std;
 
-
 int main() {
+
+    UsersFile file("users.xml");
+    /*User user;
+    user.setName("Aga");
+    user.setSurname("Turek");
+    user.setLogin("Tamta");
+    user.setPassword("porks098");
+    user.setId(4);
+    file.addUserToFile(user);*/
+
+    vector <User> users;
+    users = file.loadUserFromFile();
+    vector <User>::iterator iter = users.begin(), end = users.end();
+    for(;iter!=end;iter++){
+        cout << iter->getName() <<endl;
+        cout << iter->getSurname() <<endl;
+        cout << iter->getLogin() <<endl;
+        cout << iter->getPassword() <<endl;
+        cout << iter->getId() <<endl <<endl;
+    }
+
+
+    return 0;
+}
+
+int maindate () {
 
     string date = "";
     //date = "1999-10-01";
@@ -28,10 +58,10 @@ int main() {
     DateManager::isUserInputCorrect(date);
 
     cout << "Is date in current month period? ";
-    if (DateManager::isDateInPeriod(dateAsInt, DateManager::getCurrentMonthPeriod())){
+    if (DateManager::isDateInPeriod(dateAsInt, DateManager::getCurrentMonthPeriod())) {
         cout << "Yes" <<endl;
 
-    }else{
+    } else {
         cout << "No" <<endl;
     }
 
@@ -43,6 +73,6 @@ int main() {
     }else{
         cout << "No" <<endl;
     }
-*/
+    */
     return 0;
 }

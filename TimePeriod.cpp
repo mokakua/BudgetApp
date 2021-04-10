@@ -1,18 +1,18 @@
 #include "TimePeriod.h"
 
-    void TimePeriod::setFirstDay (int date){
+void TimePeriod::setFirstDay (int date) {
     this->firstDay = date;
-    }
+}
 
-    void TimePeriod::setLastDay (int date){
+void TimePeriod::setLastDay (int date) {
     this->lastDay = date;
-    }
+}
 
-    int TimePeriod::getFirstDay(){
+int TimePeriod::getFirstDay() {
     return this->firstDay;
-    }
+}
 
-    int TimePeriod::getLastDay(){
+int TimePeriod::getLastDay() {
 
     return this->lastDay;
-    }
+}

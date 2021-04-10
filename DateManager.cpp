@@ -123,7 +123,7 @@ int DateManager::getIntDateFromStruct(struct tm dateAsStruct) {
     return dateAsInt;
 }
 
-string getStringDateFromInt(string dateAsInt){
+string getStringDateFromInt(string dateAsInt) {
 
 }
 
@@ -148,7 +148,7 @@ TimePeriod DateManager::getCurrentMonthPeriod() {
 //TimePeriod DateManager::enterTimePeriod() {}
 
 bool DateManager::isDateInPeriod(int dateAsInt, TimePeriod period) {
-    if (period.getFirstDay()<=dateAsInt && dateAsInt <= period.getLastDay()){
+    if (period.getFirstDay()<=dateAsInt && dateAsInt <= period.getLastDay()) {
         return true;
     }
     return false;

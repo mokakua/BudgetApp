@@ -41,7 +41,7 @@ void TransactionManager::listTransactions() {
     } else {
         vector <Transaction>::iterator trans = transactions.begin(), transEnd = transactions.end();
         for (; trans!=transEnd; trans++) {
-            trans->present();
+            //trans->present();
         }
     }
 }
