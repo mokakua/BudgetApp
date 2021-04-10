@@ -1,21 +1,20 @@
 #ifndef TIMEPERIOD_H
 #define TIMEPERIOD_H
-#include <time.h>
 #include <iostream>
 
 using namespace std;
 
 class TimePeriod {
 
-    struct tm firstDay, lastDay;
+    int firstDay, lastDay;
 
 public:
 
-    void setFirstDay (struct tm date);
-    void setLastDay (struct tm date);
+    void setFirstDay (int date);
+    void setLastDay (int date);
 
-    struct tm getFirstDay();
-    struct tm getLastDay();
+    int getFirstDay();
+    int getLastDay();
 
 
 
