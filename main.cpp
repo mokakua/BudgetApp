@@ -1,5 +1,4 @@
 #include <iostream>
-#include "XmlFileManager.h"
 #include "Transaction.h"
 #include "TransactionManager.h"
 #include "DateManager.h"
@@ -15,7 +14,8 @@ using namespace std;
 
 int main() {
 
-    UsersFile file("users.xml");
+    const string USERSFILENAME = "users.xml";
+    UsersFile file(USERSFILENAME);
     /*User user;
     user.setName("Aga");
     user.setSurname("Turek");

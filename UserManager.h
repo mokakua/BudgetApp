@@ -2,6 +2,7 @@
 #define USERMANAGER_H
 #include <iostream>
 #include "User.h"
+#include "UsersFile.h"
 #include <vector>
 
 using namespace std;
@@ -10,17 +11,18 @@ class UserManager {
 
     vector <User> users;
     int idOfLoggedInUser;
-    //UsersFile usersFile;
+    UsersFile usersFile;
 
+    string askForInput(string inputName);
     //void loadUsersFromFile();
     //void addUserToFile();
     //User enterDataOfNewUser();
     //int getIdOfNewUser();
-    //bool doesUserExists();
+    //bool doesLoginExists(string loginInput);
 
 public:
 
-    UserManager();
+    UserManager(string usersFileName);
     void registerUser();
     void login();
     void changePassword();
@@ -32,7 +34,7 @@ public:
     void addUserToFile();
     User enterDataOfNewUser();
     int getIdOfNewUser();
-    bool doesUserExists();
+    bool doesLoginExists(string loginInput);
 
 };
 #endif // USERMANAGER_H
