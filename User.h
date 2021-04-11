@@ -18,11 +18,11 @@ public:
     void setId (int id);
 
 
-    string getName();
-    string getSurname();
-    string getLogin();
-    string getPassword();
-    int getId();
+    string getName() const;
+    string getSurname() const;
+    string getLogin() const;
+    string getPassword() const;
+    int getId() const;
 
 };
 #endif // USER_H

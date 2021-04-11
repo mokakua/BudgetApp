@@ -17,18 +17,18 @@ void User::setId (int id) {
     this->id = id;
 }
 
-string User::getName() {
+string User::getName() const {
     return this->name;
 }
-string User::getSurname() {
+string User::getSurname() const {
     return this->surname;
 }
-string User::getLogin() {
+string User::getLogin() const {
     return this->login;
 }
-string User::getPassword() {
+string User::getPassword() const {
     return this->password;
 }
-int User::getId() {
+int User::getId() const {
     return this->id;
 }

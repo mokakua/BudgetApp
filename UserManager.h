@@ -13,28 +13,24 @@ class UserManager {
     int idOfLoggedInUser;
     UsersFile usersFile;
 
-    string askForInput(string inputName);
-    //void loadUsersFromFile();
-    //void addUserToFile();
-    //User enterDataOfNewUser();
-    //int getIdOfNewUser();
-    //bool doesLoginExists(string loginInput);
+    string enterUserData(string inputName);
+    void addUserToFile(const User& user);
+    int getIdOfNewUser();
+    bool doesLoginExists(string loginInput);
+    vector <User>::iterator getUserByLogin(string login);
+    string convertFirstToUpperOtherToLower(string input);
 
 public:
 
     UserManager(string usersFileName);
     void registerUser();
-    void login();
+    void logIn();
     void changePassword();
     void logOut();
     int getIdOfLoggedInUser();
-
-
     void loadUsersFromFile();
-    void addUserToFile();
-    User enterDataOfNewUser();
-    int getIdOfNewUser();
-    bool doesLoginExists(string loginInput);
+
+    void listUsers();
 
 };
 #endif // USERMANAGER_H

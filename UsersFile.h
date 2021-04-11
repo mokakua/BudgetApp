@@ -13,7 +13,7 @@ class UsersFile :public XMLFile {
 public:
     UsersFile(string name);
     vector <User> loadUserFromFile();
-    void addUserToFile(User user);
+    void addUserToFile(const User& user);
     void saveAllUsersToFile();
 
 

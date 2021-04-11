@@ -28,11 +28,32 @@
 <id>4</id>
 </User>
 <User>
-<name>Aga</name>
-<surname>Turek</surname>
-<login>Tamta</login>
-<password>porks098</password>
-<id>4</id>
+<name>Agnieszka</name>
+<surname>Stasiak</surname>
+<login>ineer</login>
+<password>stp123</password>
+<id>5</id>
+</User>
+<User>
+<name>asd asf</name>
+<surname>dfhrt</surname>
+<login>sdfsdf3</login>
+<password>123124</password>
+<id>6</id>
+</User>
+<User>
+<name>michal</name>
+<surname>pisarski</surname>
+<login>itguy</login>
+<password>1234</password>
+<id>7</id>
+</User>
+<User>
+<name>michal</name>
+<surname>pisarski</surname>
+<login>itguy2</login>
+<password>12345</password>
+<id>8</id>
 </User>
 </Users>
 

@@ -15,25 +15,14 @@ using namespace std;
 int main() {
 
     const string USERSFILENAME = "users.xml";
-    UsersFile file(USERSFILENAME);
-    /*User user;
-    user.setName("Aga");
-    user.setSurname("Turek");
-    user.setLogin("Tamta");
-    user.setPassword("porks098");
-    user.setId(4);
-    file.addUserToFile(user);*/
 
-    vector <User> users;
-    users = file.loadUserFromFile();
-    vector <User>::iterator iter = users.begin(), end = users.end();
-    for(;iter!=end;iter++){
-        cout << iter->getName() <<endl;
-        cout << iter->getSurname() <<endl;
-        cout << iter->getLogin() <<endl;
-        cout << iter->getPassword() <<endl;
-        cout << iter->getId() <<endl <<endl;
-    }
+    UserManager userManager(USERSFILENAME);
+    userManager.loadUsersFromFile();
+    userManager.listUsers();
+    userManager.registerUser();
+    cout << userManager.getIdOfLoggedInUser() <<endl;
+    userManager.logIn();
+    cout << userManager.getIdOfLoggedInUser() <<endl;
 
 
     return 0;
