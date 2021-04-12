@@ -33,5 +33,7 @@ public:
 
     void listUsers();
 
+    string enterPassword();//
+
 };
 #endif // USERMANAGER_H

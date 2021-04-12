@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <windows.h>
 #include <algorithm>
+#include <conio.h>
 
 UserManager::UserManager(string usersFileName):
     idOfLoggedInUser(0), usersFile(usersFileName) {
@@ -18,7 +19,12 @@ string UserManager::enterUserData(string inputName) {
     string input = "";
     while (input == "") {
         cout << "Enter user " << inputName << ": ";
+        if (inputName == "password"){
+            input = enterPassword();
+            continue;
+        }
         getline(cin,input);
+
         if(inputName == "login") {
             if(doesLoginExists(input)) {
                 cout << "Login already exists. Try again" <<endl;
@@ -29,6 +35,38 @@ string UserManager::enterUserData(string inputName) {
         }
     }
     return input;
+}
+
+string UserManager::enterPassword(){
+    string password = "";
+    char character = 0;
+    enum specialCharacters {backspace = 8, enter = 13, esc = 27};
+    while(character != esc){
+        character = getch();
+        switch(character){
+        case backspace:
+        {
+            if(password.length()>0){
+                password.pop_back();
+                cout << "\b \b";
+            }
+        }break;
+        case enter:
+        {
+            cout << endl;
+            return password;
+        }break;
+        case esc:
+        break;
+        default:
+        {
+            password.push_back(character);
+            cout << '*';
+        }
+        }
+    }
+    password = "";
+    return password;
 }
 
 void UserManager::registerUser() {
@@ -89,7 +127,7 @@ void UserManager::logIn() {
     string validPassword = getUserByLogin(login)->getPassword();
     for (int attempts = 3; attempts>0; attempts--){
         cout << "Password: ";
-        getline(cin,password);
+        password = enterPassword();
         if (password == validPassword){
             idOfLoggedInUser = getUserByLogin(login)->getId();
             return;
@@ -107,9 +145,9 @@ void UserManager::changePassword() {
     auto user = getLoggedInUser();
     while (true){
         cout << "Enter new password: ";
-        getline(cin,newPassword);
+        newPassword = enterPassword();
         cout << "Repeat password: ";
-        getline(cin,repeatedPassword);
+        repeatedPassword = enterPassword();
         if(newPassword == repeatedPassword){
             break;
         }
