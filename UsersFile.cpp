@@ -44,16 +44,31 @@ void UsersFile::addUserToFile(const User& user) {
     file.AddChildElem("login", user.getLogin());
     file.AddChildElem("password", user.getPassword());
     file.AddChildElem("id", user.getId());
-    file.OutOfElem();
     file.ResetPos();
-    if(file.Save(name)){
-        cout << "User saved to file." <<endl;
-    }else{
-        cout << "Saving to file failed." <<endl;
-    }
 }
 
-void UsersFile::saveAllUsersToFile() {
+void UsersFile::changeUserData(const User& user) {
+    file.FindElem("Users");
+    file.IntoElem();
+    while(true) {
+        file.FindElem("User");
+        file.FindChildElem("id");
+        if (atoi(file.GetChildData().c_str())==user.getId()) {
+            file.ResetChildPos();
+            file.FindChildElem("password");
+            file.SetChildData(user.getPassword());
+            break;
+        }
+    }
+    file.ResetPos();
+}
+
+void UsersFile::saveFile() {
+    if(file.Save(name)) {
+        cout << "Data saved to file." <<endl;
+    } else {
+        cout << "Saving to file failed." <<endl;
+    }
 }
 
 

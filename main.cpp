@@ -19,10 +19,11 @@ int main() {
     UserManager userManager(USERSFILENAME);
     userManager.loadUsersFromFile();
     userManager.listUsers();
-    userManager.registerUser();
+    //userManager.registerUser();
     cout << userManager.getIdOfLoggedInUser() <<endl;
     userManager.logIn();
     cout << userManager.getIdOfLoggedInUser() <<endl;
+    userManager.changePassword();
 
 
     return 0;

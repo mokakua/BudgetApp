@@ -18,6 +18,7 @@ class UserManager {
     int getIdOfNewUser();
     bool doesLoginExists(string loginInput);
     vector <User>::iterator getUserByLogin(string login);
+    vector <User>::iterator getLoggedInUser();
     string convertFirstToUpperOtherToLower(string input);
 
 public:

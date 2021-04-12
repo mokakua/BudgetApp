@@ -62,6 +62,16 @@ vector <User>::iterator UserManager::getUserByLogin(string login){
     return user;
 }
 
+vector <User>::iterator UserManager::getLoggedInUser(){
+    vector <User> ::iterator user = users.begin(), endOfUsers = users.end();
+    for (; user!=endOfUsers; user++) {
+        if (user->getId() == getIdOfLoggedInUser()) {
+            break;
+        }
+    }
+    return user;
+}
+
 void UserManager::logIn() {
     system("cls");
     string login = "";
@@ -84,13 +94,31 @@ void UserManager::logIn() {
             idOfLoggedInUser = getUserByLogin(login)->getId();
             return;
         }
+        cout << "Password is not correct. Please try again." <<endl;
+        cout << "Attempts left: " << attempts-1 <<endl;
     }
     cout << "Operation failed" <<endl;
     Sleep(3000);
 }
 
 void UserManager::changePassword() {
-
+    string newPassword = "";
+    string repeatedPassword = "";
+    auto user = getLoggedInUser();
+    while (true){
+        cout << "Enter new password: ";
+        getline(cin,newPassword);
+        cout << "Repeat password: ";
+        getline(cin,repeatedPassword);
+        if(newPassword == repeatedPassword){
+            break;
+        }
+        cout << "Passwords do not match. Try again" <<endl <<endl;
+    }
+    user->setPassword(newPassword);
+    cout << "Password changed successfully" <<endl;
+    usersFile.changeUserData(*user);
+    usersFile.saveFile();
 }
 
 void UserManager::logOut() {
@@ -107,6 +135,7 @@ void UserManager::loadUsersFromFile() {
 
 void UserManager::addUserToFile(const User& user) {
     usersFile.addUserToFile(user);
+    usersFile.saveFile();
 }
 
 int UserManager::getIdOfNewUser() {

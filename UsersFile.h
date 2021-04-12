@@ -14,8 +14,7 @@ public:
     UsersFile(string name);
     vector <User> loadUserFromFile();
     void addUserToFile(const User& user);
-    void saveAllUsersToFile();
-
-
+    void changeUserData(const User& user);
+    void saveFile();
 };
 #endif // USERSFILE_H
