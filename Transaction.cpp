@@ -13,16 +13,16 @@ void Transaction::setValue (double value) {
     this->value = value;
 }
 
-string Transaction::getInfo() {
+string Transaction::getInfo() const{
     return this->info;
 }
 
-int Transaction::getUserId() {
+int Transaction::getUserId() const {
     return this->userId;
 }
-int Transaction::getDate() {
+int Transaction::getDate() const {
     return this->date;
 }
-double Transaction::getValue() {
+double Transaction::getValue() const {
     return this-> value;
 }

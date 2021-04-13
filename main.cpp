@@ -4,16 +4,34 @@
 #include "DateManager.h"
 #include "User.h"
 #include "UserManager.h"
-#include "XMLFile.h"
 #include "UsersFile.h"
 #include "time.h"
 #include "windows.h"
+#include "TransactionsFile.h"
 
 
 
 using namespace std;
 
-int mainUser() {
+int main() {    //transactionManager
+
+    const string USERSFILENAME = "users.xml";
+    const string EXPENSESFILENAME = "expenses.xml";
+
+    TransactionsFile transFile (EXPENSESFILENAME);
+    Transaction transaction;
+    transaction.setInfo("Za rower");
+    transaction.setUserId(1);
+    transaction.setDate(20210413);
+    transaction.setValue(4999.99);
+    transFile.addTransactionToFile(transaction);
+
+    transFile.saveFile();
+
+    return 0;
+}
+
+int mainUser() {    //UserManager
 
     const string USERSFILENAME = "users.xml";
 
@@ -31,7 +49,7 @@ int mainUser() {
     return 0;
 }
 
-int main () {
+int mainDate () {   //dateManager
 
     string date = "";
     //date = "1999-10-01";

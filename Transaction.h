@@ -18,10 +18,10 @@ public:
     void setDate (int date);
     void setValue (double value);
 
-    string getInfo();
-    int getUserId();
-    int getDate();
-    double getValue();
+    string getInfo() const;
+    int getUserId() const;
+    int getDate() const;
+    double getValue() const;
 
 };
 #endif // TRANSACTION_H
