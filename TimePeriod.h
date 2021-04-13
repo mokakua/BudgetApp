@@ -10,6 +10,9 @@ class TimePeriod {
 
 public:
 
+    TimePeriod():
+        firstDay(2000-01-01), lastDay(2000-01-31){};
+
     void setFirstDay (int date);
     void setLastDay (int date);
 

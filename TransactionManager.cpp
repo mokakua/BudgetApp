@@ -1,5 +1,4 @@
 #include "TransactionManager.h"
-#include "XmlFileManager.h"
 #include "DateManager.h"
 #include "Markup.h"
 #include <cstdlib>
@@ -7,7 +6,7 @@
 #include <time.h>
 
 bool TransactionManager::loadTransactionsFromFile(string fileName) {
-    XmlFileManager fileOpener;
+    /*XmlFileManager fileOpener;
     CMarkup xmlFile;
     if (fileOpener.openFile(&xmlFile, fileName)) {
         xmlFile.FindElem();
@@ -32,7 +31,8 @@ bool TransactionManager::loadTransactionsFromFile(string fileName) {
     } else {
         return false;
     }
-
+*/
+return true;
 }
 
 void TransactionManager::listTransactions() {
@@ -41,7 +41,7 @@ void TransactionManager::listTransactions() {
     } else {
         vector <Transaction>::iterator trans = transactions.begin(), transEnd = transactions.end();
         for (; trans!=transEnd; trans++) {
-            trans->present();
+            //trans->present();
         }
     }
 }

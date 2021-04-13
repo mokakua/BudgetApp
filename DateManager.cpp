@@ -123,32 +123,86 @@ int DateManager::getIntDateFromStruct(struct tm dateAsStruct) {
     return dateAsInt;
 }
 
-string getStringDateFromInt(string dateAsInt){
+string DateManager::convertIntToString (int number){
+    ostringstream stream;
+    stream << number;
+    string numberAsString = stream.str();
+    if(number<10){
+        numberAsString.insert(0,"0");
+    }
+    return numberAsString;
+}
 
+string DateManager::getStringDateFromInt(int dateAsInt) {
+    string dateAsString = "";
+    string year = "", month = "", day = "";
+    day = convertIntToString(dateAsInt%100);
+    dateAsInt/=100;
+    month = convertIntToString(dateAsInt%100);
+    dateAsInt/=100;
+    year = convertIntToString(dateAsInt);
+    dateAsString = year + "-" + month + "-" + day;
+    return dateAsString;
 }
 
 TimePeriod DateManager::getCurrentMonthPeriod() {
     TimePeriod currentMonth;
     time_t now = time(NULL);
-    struct tm nowStruct = *localtime(&now);
+    struct tm dateComponents = *localtime(&now);
 
-    nowStruct.tm_mday=1;
-    mktime(&nowStruct);
-    currentMonth.setFirstDay(getIntDateFromStruct(nowStruct));
+    dateComponents.tm_mday=1;
+    mktime(&dateComponents);
+    currentMonth.setFirstDay(getIntDateFromStruct(dateComponents));
 
-    nowStruct.tm_mday=howManyDaysInMonth(getIntDateFromStruct(nowStruct));
-    mktime(&nowStruct);
-    currentMonth.setLastDay(getIntDateFromStruct(nowStruct));
+    dateComponents.tm_mday=howManyDaysInMonth(getIntDateFromStruct(dateComponents));
+    mktime(&dateComponents);
+    currentMonth.setLastDay(getIntDateFromStruct(dateComponents));
 
     return currentMonth;
 }
 
-//TimePeriod DateManager::getPreviousMonthPeriod() {}
+TimePeriod DateManager::getPreviousMonthPeriod() {
+    TimePeriod previousMonth;
+    time_t now = time(NULL);
+    struct tm dateComponents = *localtime(&now);
+    dateComponents.tm_mon-=1;
 
-//TimePeriod DateManager::enterTimePeriod() {}
+    dateComponents.tm_mday=1;
+    mktime(&dateComponents);
+    previousMonth.setFirstDay(getIntDateFromStruct(dateComponents));
+
+    dateComponents.tm_mday=howManyDaysInMonth(getIntDateFromStruct(dateComponents));
+    mktime(&dateComponents);
+    previousMonth.setLastDay(getIntDateFromStruct(dateComponents));
+
+    return previousMonth;
+}
+
+TimePeriod DateManager::enterTimePeriod() {
+    TimePeriod period;
+    cout << "Set time period:" <<endl;
+    cout << "FROM" <<endl;
+    period.setFirstDay(getIntDateFromString(enterDate()));
+    cout << "TO" <<endl;
+    period.setLastDay(getIntDateFromString(enterDate()));
+    return period;
+}
+
+string DateManager::enterDate() {
+    string dateAsString = "";
+    while(true) {
+        cout << "Enter date (yyyy-mm-dd): ";
+        getline(cin,dateAsString);
+        if (isUserInputCorrect(dateAsString)){
+            break;
+        }
+        cout << "Try again" <<endl;
+    }
+    return dateAsString;
+}
 
 bool DateManager::isDateInPeriod(int dateAsInt, TimePeriod period) {
-    if (period.getFirstDay()<=dateAsInt && dateAsInt <= period.getLastDay()){
+    if (period.getFirstDay()<=dateAsInt && dateAsInt <= period.getLastDay()) {
         return true;
     }
     return false;

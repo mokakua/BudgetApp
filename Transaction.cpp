@@ -1,32 +1,28 @@
 #include "Transaction.h"
 
-    void Transaction::present(){
-    cout << "Info: " << this->info << endl;
-    cout << "Value: " << this->value << "$ from: " << "DateManager"/*DateManager::*/ << endl;
-    }
-    void Transaction::setInfo(string info){
+void Transaction::setInfo(string info) {
     this->info = info;
-    }
-    void Transaction::setUserId(int userId){
+}
+void Transaction::setUserId(int userId) {
     this->userId = userId;
-    }
-    void Transaction::setDate (int date){
+}
+void Transaction::setDate (int date) {
     this->date = date;
-    }
-    void Transaction::setValue (double value){
+}
+void Transaction::setValue (double value) {
     this->value = value;
-    }
+}
 
-    string Transaction::getInfo(){
+string Transaction::getInfo() {
     return this->info;
-    }
+}
 
-    int Transaction::getUserId(){
+int Transaction::getUserId() {
     return this->userId;
-    }
-    int Transaction::getDate(){
+}
+int Transaction::getDate() {
     return this->date;
-    }
-    double Transaction::getValue(){
+}
+double Transaction::getValue() {
     return this-> value;
-    }
+}

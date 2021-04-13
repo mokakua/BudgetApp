@@ -12,10 +12,6 @@ class Transaction {
     double value;
 
 public:
-    Transaction() {};
-    ~Transaction() {};
-
-    void present();
 
     void setInfo (string info);
     void setUserId (int id);
