@@ -13,7 +13,7 @@
 
 using namespace std;
 
-int main() {
+int mainUser() {
 
     const string USERSFILENAME = "users.xml";
 
@@ -31,7 +31,7 @@ int main() {
     return 0;
 }
 
-int maindate () {
+int main () {
 
     string date = "";
     //date = "1999-10-01";
@@ -56,8 +56,30 @@ int maindate () {
     } else {
         cout << "No" <<endl;
     }
+/*
+    while (true){
 
+        period = DateManager::enterTimePeriod();
+        cout << period.getFirstDay() <<endl;
+        cout << period.getLastDay() <<endl;
+    }
+*/
+    TimePeriod period = DateManager::getCurrentMonthPeriod();
+    cout << DateManager::getStringDateFromInt(period.getFirstDay()) <<endl;
+    cout << DateManager::getStringDateFromInt(period.getLastDay()) <<endl;
+    period = DateManager::getPreviousMonthPeriod();
+    cout << DateManager::getStringDateFromInt(period.getFirstDay()) <<endl;
+    cout << DateManager::getStringDateFromInt(period.getLastDay()) <<endl;
+/*
+time_t today = time(NULL);
+cout << "Today: " << ctime(&today) <<endl;
+struct tm todayTM = *localtime(&today);
+todayTM.tm_mon-=4;
+mktime(&todayTM);
+cout << "Before 4 months" << asctime(&todayTM) <<endl;
+*/
     /*
+
     cout << "Is date later than today? ";
     time_t today = time(NULL);
     if(dateAsInt > DateManager::getIntDateFromStruct(*localtime(&today))){
