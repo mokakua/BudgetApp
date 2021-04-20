@@ -8,19 +8,26 @@ TransactionsFile::TransactionsFile(string name)
         file.AddElem("Transactions");
         file.Save(name);
     }
+    lastTransactionId = extractLastTransactionId();
 }
 
-vector <Transaction> TransactionsFile::loadTransactionsFromFile() {
+vector <Transaction> TransactionsFile::loadUserTransactionsFromFile(int userId) {
     vector <Transaction> transactions;
     file.FindElem("Transactions");
     file.IntoElem();
     while(file.FindElem("Transaction")) {
         Transaction transaction;
-        file.FindChildElem("info");
-        transaction.setInfo(file.GetChildData());
-        file.ResetChildPos();
         file.FindChildElem("userId");
         transaction.setUserId(atoi(file.GetChildData().c_str()));
+        if(transaction.getUserId()!=userId){
+            continue;
+        }
+        file.ResetChildPos();
+        file.FindChildElem("transactionId");
+        transaction.setTransactionId(atoi(file.GetChildData().c_str()));
+        file.ResetChildPos();
+        file.FindChildElem("item");
+        transaction.setItem(file.GetChildData());
         file.ResetChildPos();
         file.FindChildElem("date");
         transaction.setDate(DateManager::getIntDateFromString(file.GetChildData()));
@@ -38,28 +45,13 @@ void TransactionsFile::addTransactionToFile(const Transaction& transaction) {
     file.FindElem("Transactions");
     file.IntoElem();
     file.AddElem("Transaction");
-    file.AddChildElem("info", transaction.getInfo());
     file.AddChildElem("userId", transaction.getUserId());
-    file.AddChildElem("date", transaction.getDate());
+    file.AddChildElem("transactionId", transaction.getTransactionId());
+    file.AddChildElem("item", transaction.getItem());
+    file.AddChildElem("date", DateManager::getStringDateFromInt(transaction.getDate()));
     file.AddChildElem("value", to_string(transaction.getValue()));
     file.ResetPos();
 }
-/*
-void TransactionsFile::changeTransactionData(const User& user) {
-    file.FindElem("Users");
-    file.IntoElem();
-    while(true) {
-        file.FindElem("User");
-        file.FindChildElem("id");
-        if (atoi(file.GetChildData().c_str())==user.getId()) {
-            file.ResetChildPos();
-            file.FindChildElem("password");
-            file.SetChildData(user.getPassword());
-            break;
-        }
-    }
-    file.ResetPos();
-}*/
 
 void TransactionsFile::saveFile() {
     if(file.Save(name)) {
@@ -68,5 +60,19 @@ void TransactionsFile::saveFile() {
         cout << "Saving to file failed." <<endl;
     }
 }
+int TransactionsFile::extractLastTransactionId(){
+    int lastId = 0;
+    file.FindElem("Transactions");
+    file.IntoElem();
+    if(file.FindElem("Transaction")){
+        while(file.FindElem("Transaction")){};
+        file.FindChildElem("transactionId");
+        lastId = atoi(file.GetChildData().c_str());
+        file.ResetPos();
+    }
+    return lastId;
+}
 
-
+int TransactionsFile::getLastTransactionId(){
+    return this->lastTransactionId;
+};

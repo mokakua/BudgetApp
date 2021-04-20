@@ -16,8 +16,8 @@ public:
     void setFirstDay (int date);
     void setLastDay (int date);
 
-    int getFirstDay();
-    int getLastDay();
+    int getFirstDay() const;
+    int getLastDay() const;
 
 
 

@@ -8,13 +8,14 @@
 using namespace std;
 
 class TransactionsFile :public XMLFile {
-
+    int lastTransactionId;
 
 public:
     TransactionsFile(string name);
-    vector <Transaction> loadTransactionsFromFile();
+    vector <Transaction> loadUserTransactionsFromFile(int userId);
     void addTransactionToFile(const Transaction& transaction);
-    //void changeUserData(const Transaction& transaction);
     void saveFile();
+    int extractLastTransactionId();
+    int getLastTransactionId();
 };
 #endif // TRANSACTIONSFILE_H

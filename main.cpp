@@ -17,17 +17,28 @@ int main() {    //transactionManager
 
     const string USERSFILENAME = "users.xml";
     const string EXPENSESFILENAME = "expenses.xml";
+    const string INCOMESFILENAME = "incomes.xml";
+    int userId = 1;
 
+    TransactionManager tManager(userId,INCOMESFILENAME,EXPENSESFILENAME);
+    tManager.loadUserTransactionsFromFile();
+    tManager.listUsersTransactions();
+    //tManager.addExpense();
+    //tManager.addIncome();
+    //tManager.listUsersTransactions();
+    tManager.showCurrentMonthBalance();
+
+    /*
     TransactionsFile transFile (EXPENSESFILENAME);
     Transaction transaction;
     transaction.setInfo("Za rower");
-    transaction.setUserId(1);
+    transaction.setUserId(userId);
     transaction.setDate(20210413);
     transaction.setValue(4999.99);
     transFile.addTransactionToFile(transaction);
 
     transFile.saveFile();
-
+    */
     return 0;
 }
 

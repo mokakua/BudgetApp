@@ -6,21 +6,24 @@ using namespace std;
 
 class Transaction {
 
-    string info;
-    int userId;
+    int transactionId, userId;
     int date;
+    string item;
     double value;
 
 public:
 
-    void setInfo (string info);
-    void setUserId (int id);
+    bool operator<(Transaction transaction2);
+    void setTransactionId (int transId);
+    void setUserId (int userId);
     void setDate (int date);
+    void setItem (string item);
     void setValue (double value);
 
-    string getInfo() const;
+    int getTransactionId() const;
     int getUserId() const;
     int getDate() const;
+    string getItem() const;
     double getValue() const;
 
 };

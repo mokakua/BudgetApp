@@ -1,7 +1,13 @@
 #include "Transaction.h"
 
-void Transaction::setInfo(string info) {
-    this->info = info;
+bool Transaction::operator<(Transaction transaction2){return date< transaction2.getDate();}
+
+void Transaction::setTransactionId (int transId){
+    this->transactionId = transId;
+}
+
+void Transaction::setItem(string item) {
+    this->item = item;
 }
 void Transaction::setUserId(int userId) {
     this->userId = userId;
@@ -13,8 +19,12 @@ void Transaction::setValue (double value) {
     this->value = value;
 }
 
-string Transaction::getInfo() const{
-    return this->info;
+int Transaction::getTransactionId() const{
+    return this->transactionId;
+}
+
+string Transaction::getItem() const{
+    return this->item;
 }
 
 int Transaction::getUserId() const {

@@ -1,0 +1,24 @@
+<Transaction>
+<info>Salary</info>
+<userId>1</userId>
+<date>2021-04-19</date>
+<value>5000.000000</value>
+</Transaction>
+<Transaction>
+<info>Teacher</info>
+<userId>1</userId>
+<date>2021-04-01</date>
+<value>100.000000</value>
+</Transaction>
+<Transaction>
+<info>New<info/>
+<userId>1</userId>
+<date>2020-05-09</date>
+<value>200</value>
+</Transaction>
+<Transaction>
+<info>info 1</info>
+<userId>1</userId>
+<date>2020-01-01</date>
+<value>123.000000</value>
+<Transactions/>
