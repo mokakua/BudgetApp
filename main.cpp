@@ -22,23 +22,14 @@ int main() {    //transactionManager
 
     TransactionManager tManager(userId,INCOMESFILENAME,EXPENSESFILENAME);
     tManager.loadUserTransactionsFromFile();
-    tManager.listUsersTransactions();
-    //tManager.addExpense();
-    //tManager.addIncome();
+    //tManager.listAllUsersTransactions();
+    tManager.addExpense();
+    tManager.addIncome();
     //tManager.listUsersTransactions();
-    tManager.showCurrentMonthBalance();
+    tManager.showCurrentMonthStatement();
+    tManager.showPreviousMonthStatement();
+    tManager.showCustomPeriodStatement();
 
-    /*
-    TransactionsFile transFile (EXPENSESFILENAME);
-    Transaction transaction;
-    transaction.setInfo("Za rower");
-    transaction.setUserId(userId);
-    transaction.setDate(20210413);
-    transaction.setValue(4999.99);
-    transFile.addTransactionToFile(transaction);
-
-    transFile.saveFile();
-    */
     return 0;
 }
 

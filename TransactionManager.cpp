@@ -15,106 +15,6 @@ void TransactionManager::loadUserTransactionsFromFile() {
     incomes = incomesFile.loadUserTransactionsFromFile(userId);
 }
 
-void TransactionManager::listUsersTransactions() {
-    cout << setprecision(2) << std::fixed;
-    cout << "All incomes:" <<endl;
-    listTransactions(incomes);
-    cout << endl;
-    cout << "All expenses:" <<endl;
-    listTransactions(expenses);
-    cout << endl;
-}
-void TransactionManager::listTransactionsFromPeriod(const vector <Transaction>& incomesFromPeriod, const vector <Transaction>& expensesFromPeriod, const TimePeriod& period){
-    cout << "Balance from " << DateManager::getStringDateFromInt(period.getFirstDay());
-    cout << " to " << DateManager::getStringDateFromInt(period.getLastDay()) <<endl;
-    cout << setprecision(2) << std::fixed;
-    cout << "***INCOMES***:" <<endl;
-    listTransactions(incomesFromPeriod);
-    cout << endl;
-    cout << "***EXPENSES***:" <<endl;
-    listTransactions(expensesFromPeriod);
-    cout << endl;
-}
-
-void TransactionManager::listTransactions(vector <Transaction> transactions) {
-    if(transactions.empty()) {
-        cout << "No transactions." <<endl;
-    } else {
-        string separator = "";
-        separator.append(MESSAGE_LENGTH+17,'-');
-        vector <Transaction>::iterator trans = transactions.begin(), transEnd = transactions.end();
-        for (; trans!=transEnd; trans++) {
-            cout << DateManager::getStringDateFromInt(trans->getDate()) <<'\t';
-            cout << showInfo(trans->getItem())                          <<' ';
-            cout << '=' <<trans->getValue() << "zl"                     <<endl;
-            cout << separator                                           <<endl;
-        }
-    }
-}
-
-string TransactionManager::showInfo(string info) {
-    int infoLength = info.length();
-    info.append(MESSAGE_LENGTH-infoLength,' ');
-    return info;
-}
-
-bool TransactionManager::isTransactionLaterThan (const Transaction& trans1, const Transaction& trans2) {
-    return trans1.getDate()<trans2.getDate();
-}
-
-void TransactionManager::sortTransactionsToLatest(vector <Transaction>& transactions) {
-    sort(transactions.begin(), transactions.end());
-}
-
-vector <Transaction> TransactionManager::getTransactionsFromPeriod(const TimePeriod& period, const vector <Transaction>& transactions) {
-    vector <Transaction> transactionsFromPeriod;
-    vector <Transaction>::const_iterator trans = transactions.begin(), transEnd = transactions.end();
-    for( ; trans!=transEnd ; trans++) {
-        if(trans->getDate() >= period.getFirstDay() && trans->getDate() <= period.getLastDay()) {
-            transactionsFromPeriod.push_back(*trans);
-        }
-    }
-    return transactionsFromPeriod;
-}
-
-double TransactionManager::getBalanceOfTransactions(const vector <Transaction>& incomes, const vector <Transaction>& expenses) {
-    double balance1=0, balance2=0;
-    vector <Transaction>::const_iterator trans = incomes.begin(), transEnd = incomes.end();
-    for( ; trans!=transEnd ; trans++) {
-            balance1 += trans->getValue();
-    }
-    cout << "Total Incomes: " << balance1 <<endl;
-    vector <Transaction>::const_iterator trans2 = expenses.begin(), transEnd2 = expenses.end();
-    for( ; trans2!=transEnd2 ; trans2++) {
-            balance2 += trans2->getValue();
-    }
-    cout << "Total Expenses: " << balance2 <<endl;
-
-    return balance1-balance2;
-}
-
-void TransactionManager::showCurrentMonthBalance() {
-    TimePeriod period= DateManager::getCurrentMonthPeriod();
-    vector <Transaction> incomesFromPeriod, expensesFromPeriod;
-    incomesFromPeriod = getTransactionsFromPeriod(period, incomes);
-    sortTransactionsToLatest(incomesFromPeriod);
-    expensesFromPeriod = getTransactionsFromPeriod(period, expenses);
-    sortTransactionsToLatest(expensesFromPeriod);
-    listTransactionsFromPeriod(incomesFromPeriod, expensesFromPeriod, period);
-    //cout << "Total Incomes: " << <<endl;
-    //cout << "Total Expenses: " << <<endl;
-    double total = getBalanceOfTransactions(incomesFromPeriod, expensesFromPeriod);
-    cout << "TOTAL: " << total <<endl;
-}
-
-void TransactionManager::showPreviousMonthBalance() {
-
-}
-
-void TransactionManager::showCustomPeriodBalance() {
-
-}
-
 void TransactionManager::addIncome() {
     cout << "***ADD INCOME***" <<endl;
     Transaction transaction = enterTransactionData();
@@ -185,4 +85,111 @@ bool TransactionManager::isValueFormatCorrect(string &input) {
         }
     }
     return true;
+}
+
+void TransactionManager::listTransactionsFromPeriod(const vector <Transaction>& periodicIncomes, const vector <Transaction>& periodicExpenses, const TimePeriod& period){
+    cout << "Statement from " << DateManager::getStringDateFromInt(period.getFirstDay());
+    cout << " to " << DateManager::getStringDateFromInt(period.getLastDay()) <<endl;
+    cout << setprecision(2) << std::fixed;
+    cout << "***INCOMES***:" <<endl;
+    listTransactions(periodicIncomes);
+    cout << endl;
+    cout << "***EXPENSES***:" <<endl;
+    listTransactions(periodicExpenses);
+    cout << endl;
+}
+
+void TransactionManager::listTransactions(vector <Transaction> transactions) {
+    if(transactions.empty()) {
+        cout << "No transactions." <<endl;
+    } else {
+        string separator = "";
+        separator.append(MESSAGE_LENGTH+17,'-');
+        vector <Transaction>::iterator trans = transactions.begin(), transEnd = transactions.end();
+        for (; trans!=transEnd; trans++) {
+            cout << DateManager::getStringDateFromInt(trans->getDate()) <<'\t';
+            cout << showInfo(trans->getItem())                          <<' ';
+            cout << '=' << trans->getValue() << "zl"                    <<endl;
+            cout << separator                                           <<endl;
+        }
+    }
+}
+
+string TransactionManager::showInfo(string info) {
+    int infoLength = info.length();
+    info.append(MESSAGE_LENGTH-infoLength,' ');
+    return info;
+}
+
+bool TransactionManager::isTransactionLaterThan (const Transaction& trans1, const Transaction& trans2) {
+    return trans1.getDate()<trans2.getDate();
+}
+
+void TransactionManager::sortTransactionsToLatest(vector <Transaction>& transactions) {
+    sort(transactions.begin(), transactions.end());
+}
+
+vector <Transaction> TransactionManager::selectTransactionsFromPeriod(const TimePeriod& period, const vector <Transaction>& transactions) {
+    vector <Transaction> transactionsFromPeriod;
+    vector <Transaction>::const_iterator trans = transactions.begin(), transEnd = transactions.end();
+    for( ; trans!=transEnd ; trans++) {
+        if(trans->getDate() >= period.getFirstDay() && trans->getDate() <= period.getLastDay()) {
+            transactionsFromPeriod.push_back(*trans);
+        }
+    }
+    return transactionsFromPeriod;
+}
+double TransactionManager::sumOfTransactions(const vector <Transaction>& transactions){
+    double sumOfTransactions=0;
+    vector <Transaction>::const_iterator trans = transactions.begin(), transEnd = transactions.end();
+    for( ; trans!=transEnd ; trans++) {
+            sumOfTransactions += trans->getValue();
+    }
+    return sumOfTransactions;
+}
+
+void TransactionManager::showBalanceOfTransactions(const vector <Transaction>& incomes, const vector <Transaction>& expenses) {
+    double incomesTotal=0, expensesTotal=0;
+    incomesTotal = sumOfTransactions(incomes);
+    expensesTotal = sumOfTransactions(expenses);
+    cout << "***TOTAL***"<< endl;
+    cout << "INCOME\t"   << incomesTotal                 << endl;
+    cout << "OUTCOME\t"  << expensesTotal                << endl;
+    cout << "BALANCE\t"  << incomesTotal - expensesTotal << endl;
+}
+
+
+void TransactionManager::showPeriodStatement(const TimePeriod& period) {
+    vector <Transaction> incomesFromPeriod, expensesFromPeriod;
+    incomesFromPeriod = selectTransactionsFromPeriod(period, incomes);
+    sortTransactionsToLatest(incomesFromPeriod);
+    expensesFromPeriod = selectTransactionsFromPeriod(period, expenses);
+    sortTransactionsToLatest(expensesFromPeriod);
+    listTransactionsFromPeriod(incomesFromPeriod, expensesFromPeriod, period);
+    showBalanceOfTransactions(incomesFromPeriod, expensesFromPeriod);
+}
+
+void TransactionManager::showCurrentMonthStatement(){
+    TimePeriod period= DateManager::getCurrentMonthPeriod();
+    showPeriodStatement(period);
+}
+
+void TransactionManager::showPreviousMonthStatement() {
+    TimePeriod period= DateManager::getPreviousMonthPeriod();
+    showPeriodStatement(period);
+}
+
+void TransactionManager::showCustomPeriodStatement() {
+    TimePeriod period= DateManager::enterTimePeriod();
+    showPeriodStatement(period);
+}
+
+void TransactionManager::listAllUsersTransactions() {
+    cout << setprecision(2) << std::fixed;
+    cout << "All incomes:" <<endl;
+    listTransactions(incomes);
+    cout << endl;
+    cout << "All expenses:" <<endl;
+    listTransactions(expenses);
+    cout << endl;
 }

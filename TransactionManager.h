@@ -16,33 +16,36 @@ class TransactionManager {
     TransactionsFile incomesFile;
     TransactionsFile expensesFile;
     int userId;
-    const int MESSAGE_LENGTH;
+    const size_t MESSAGE_LENGTH;
 
-    void enterData();
+    Transaction enterTransactionData();
     string askForItem();
     double askForValue();
     int askForDate();
     bool isValueFormatCorrect(string &input);
-    void listTransactionsFromPeriod(const vector <Transaction>& incomesFromPeriod, const vector <Transaction>& expensesFromPeriod, const TimePeriod& period);
     void listTransactions(vector <Transaction> transactions);
+    string showInfo(string info);
     bool isTransactionLaterThan (const Transaction& trans1, const Transaction& trans2);
 
+
+    vector <Transaction> selectTransactionsFromPeriod(const TimePeriod& period, const vector <Transaction>& transactions);
+    void listTransactionsFromPeriod(const vector <Transaction>& periodicIncomes, const vector <Transaction>& periodicExpenses, const TimePeriod& period);
     void sortTransactionsToLatest(vector <Transaction>& transactions);
-    vector <Transaction> getTransactionsFromPeriod(const TimePeriod& period, const vector <Transaction>& transactions);
-    double getBalanceOfTransactions(const vector <Transaction>& incomes, const vector <Transaction>& expenses);
-    Transaction enterTransactionData();
-    string showInfo(string info);
+    double sumOfTransactions(const vector <Transaction>& transactions);
+    void showBalanceOfTransactions(const vector <Transaction>& incomes, const vector <Transaction>& expenses);
+    void showPeriodStatement(const TimePeriod& period);
 
 public:
     TransactionManager(int id, const string& NAME_OF_INCOMES_FILE, const string& NAME_OF_EXPENSES_FILE);
 
     void addIncome();
     void addExpense();
-    void showCurrentMonthBalance();
-    void showPreviousMonthBalance();
-    void showCustomPeriodBalance();
+    void showCurrentMonthStatement();
+    void showPreviousMonthStatement();
+    void showCustomPeriodStatement();
     void loadUserTransactionsFromFile();
-    void listUsersTransactions();
+
+    void listAllUsersTransactions();
 
 };
 #endif // TRANSACTIONMANAGER_H

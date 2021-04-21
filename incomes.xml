@@ -55,4 +55,32 @@
 <date>2021-04-01</date>
 <value>108.000000</value>
 </Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>9</transactionId>
+<item>Compensation</item>
+<date>2021-03-09</date>
+<value>5200.800000</value>
+</Transaction>
+<Transaction>
+<userId>2</userId>
+<transactionId>10</transactionId>
+<item>First income</item>
+<date>2021-04-10</date>
+<value>2300.000000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>11</transactionId>
+<item>Added decimal income</item>
+<date>2021-04-21</date>
+<value>200.000000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>12</transactionId>
+<item>compare</item>
+<date>2021-04-21</date>
+<value>123.000000</value>
+</Transaction>
 </Transactions>
