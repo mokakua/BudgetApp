@@ -4,16 +4,36 @@
 #include "DateManager.h"
 #include "User.h"
 #include "UserManager.h"
-#include "XMLFile.h"
 #include "UsersFile.h"
 #include "time.h"
 #include "windows.h"
+#include "TransactionsFile.h"
 
 
 
 using namespace std;
 
-int mainUser() {
+int main() {    //transactionManager
+
+    const string USERSFILENAME = "users.xml";
+    const string EXPENSESFILENAME = "expenses.xml";
+    const string INCOMESFILENAME = "incomes.xml";
+    int userId = 1;
+
+    TransactionManager tManager(userId,INCOMESFILENAME,EXPENSESFILENAME);
+    tManager.loadUserTransactionsFromFile();
+    //tManager.listAllUsersTransactions();
+    tManager.addExpense();
+    tManager.addIncome();
+    //tManager.listUsersTransactions();
+    tManager.showCurrentMonthStatement();
+    tManager.showPreviousMonthStatement();
+    tManager.showCustomPeriodStatement();
+
+    return 0;
+}
+
+int mainUser() {    //UserManager
 
     const string USERSFILENAME = "users.xml";
 
@@ -31,7 +51,7 @@ int mainUser() {
     return 0;
 }
 
-int main () {
+int mainDate () {   //dateManager
 
     string date = "";
     //date = "1999-10-01";

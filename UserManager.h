@@ -23,7 +23,7 @@ class UserManager {
 
 public:
 
-    UserManager(string usersFileName);
+    UserManager(const string& usersFileName);
     void registerUser();
     void logIn();
     void changePassword();

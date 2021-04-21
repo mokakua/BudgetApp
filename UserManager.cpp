@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <conio.h>
 
-UserManager::UserManager(string usersFileName):
+UserManager::UserManager(const string& usersFileName):
     idOfLoggedInUser(0), usersFile(usersFileName) {
 
 }

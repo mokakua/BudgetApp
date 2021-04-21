@@ -8,11 +8,11 @@ void TimePeriod::setLastDay (int date) {
     this->lastDay = date;
 }
 
-int TimePeriod::getFirstDay() {
+int TimePeriod::getFirstDay() const{
     return this->firstDay;
 }
 
-int TimePeriod::getLastDay() {
+int TimePeriod::getLastDay() const{
 
     return this->lastDay;
 }
