@@ -55,4 +55,11 @@
 <password>12345</password>
 <id>8</id>
 </User>
+<User>
+<name>snake1</name>
+<surname>snake2</surname>
+<login>snake</login>
+<password>snake123</password>
+<id>9</id>
+</User>
 </Users>

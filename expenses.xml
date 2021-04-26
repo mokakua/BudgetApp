@@ -55,4 +55,11 @@
 <date>2021-04-21</date>
 <value>132.123655</value>
 </Transaction>
+<Transaction>
+<userId>9</userId>
+<transactionId>9</transactionId>
+<item>Karma</item>
+<date>2021-03-05</date>
+<value>20.990000</value>
+</Transaction>
 </Transactions>

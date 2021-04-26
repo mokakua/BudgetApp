@@ -6,7 +6,7 @@
 
 UserManager::UserManager(const string& usersFileName):
     idOfLoggedInUser(0), usersFile(usersFileName) {
-
+    loadUsersFromFile();
 }
 
 string UserManager::convertFirstToUpperOtherToLower(string input){
@@ -85,7 +85,7 @@ void UserManager::registerUser() {
     user.setId(getIdOfNewUser());
     users.push_back(user);
     cout << "User registred" <<endl;
-    usersFile.addUserToFile(user);
+    addUserToFile(user);
     Sleep (1000);
     system("cls");
 }
@@ -111,7 +111,6 @@ vector <User>::iterator UserManager::getLoggedInUser(){
 }
 
 void UserManager::logIn() {
-    system("cls");
     string login = "";
     string password = "";
     cout << "*** LOG IN ***" <<endl;
@@ -135,8 +134,12 @@ void UserManager::logIn() {
         cout << "Password is not correct. Please try again." <<endl;
         cout << "Attempts left: " << attempts-1 <<endl;
     }
-    cout << "Operation failed" <<endl;
-    Sleep(3000);
+    for (int time = 3; time > 0; time--){
+        system("cls");
+        cout << "Operation failed. Penalty time: " << time << "s" <<endl;
+        Sleep(1000);
+    }
+
 }
 
 void UserManager::changePassword() {

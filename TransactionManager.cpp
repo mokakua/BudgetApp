@@ -8,7 +8,10 @@
 #include <algorithm>
 
 TransactionManager::TransactionManager(int id, const string& NAME_OF_INCOMES_FILE, const string& NAME_OF_EXPENSES_FILE):
-    incomesFile(NAME_OF_INCOMES_FILE), expensesFile(NAME_OF_EXPENSES_FILE), userId(id), MESSAGE_LENGTH(40) {}
+    incomesFile(NAME_OF_INCOMES_FILE), expensesFile(NAME_OF_EXPENSES_FILE), userId(id), MESSAGE_LENGTH(40) {
+
+    loadUserTransactionsFromFile();
+}
 
 void TransactionManager::loadUserTransactionsFromFile() {
     expenses = expensesFile.loadUserTransactionsFromFile(userId);
@@ -22,6 +25,7 @@ void TransactionManager::addIncome() {
     incomes.push_back(transaction);
     incomesFile.addTransactionToFile(transaction);
     incomesFile.saveFile();
+    getchar();
 }
 
 void TransactionManager::addExpense() {
@@ -31,6 +35,7 @@ void TransactionManager::addExpense() {
     expenses.push_back(transaction);
     expensesFile.addTransactionToFile(transaction);
     expensesFile.saveFile();
+    getchar();
 }
 
 Transaction TransactionManager::enterTransactionData() {
@@ -167,6 +172,7 @@ void TransactionManager::showPeriodStatement(const TimePeriod& period) {
     sortTransactionsToLatest(expensesFromPeriod);
     listTransactionsFromPeriod(incomesFromPeriod, expensesFromPeriod, period);
     showBalanceOfTransactions(incomesFromPeriod, expensesFromPeriod);
+    getchar();
 }
 
 void TransactionManager::showCurrentMonthStatement(){

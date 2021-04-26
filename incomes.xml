@@ -83,4 +83,25 @@
 <date>2021-04-21</date>
 <value>123.000000</value>
 </Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>13</transactionId>
+<item>Extra job</item>
+<date>2021-04-26</date>
+<value>123.500000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>14</transactionId>
+<item>Bribe</item>
+<date>2021-04-20</date>
+<value>100.000000</value>
+</Transaction>
+<Transaction>
+<userId>9</userId>
+<transactionId>15</transactionId>
+<item>Modeling</item>
+<date>2021-03-01</date>
+<value>100.000000</value>
+</Transaction>
 </Transactions>

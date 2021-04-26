@@ -48,8 +48,6 @@ bool DateManager::areValuesCorrect(string dateAsString) {
         cout << "Time is out of range" <<endl;
         return false;
     }
-
-    cout << "Ok" <<endl;
     return true;
 }
 

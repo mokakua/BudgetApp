@@ -51,6 +51,7 @@ void TransactionsFile::addTransactionToFile(const Transaction& transaction) {
     file.AddChildElem("date", DateManager::getStringDateFromInt(transaction.getDate()));
     file.AddChildElem("value", to_string(transaction.getValue()));
     file.ResetPos();
+    cout << "Transaction successfully added." <<endl;
 }
 
 void TransactionsFile::saveFile() {
