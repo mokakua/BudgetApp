@@ -41,7 +41,7 @@ vector <Transaction> TransactionsFile::loadUserTransactionsFromFile(int userId) 
     return transactions;
 }
 
-void TransactionsFile::addTransactionToFile(const Transaction& transaction) {
+bool TransactionsFile::addTransactionToFile(const Transaction& transaction) {
     file.FindElem("Transactions");
     file.IntoElem();
     file.AddElem("Transaction");
@@ -51,16 +51,9 @@ void TransactionsFile::addTransactionToFile(const Transaction& transaction) {
     file.AddChildElem("date", DateManager::getStringDateFromInt(transaction.getDate()));
     file.AddChildElem("value", to_string(transaction.getValue()));
     file.ResetPos();
-    cout << "Transaction successfully added." <<endl;
+    return (file.Save(name));
 }
 
-void TransactionsFile::saveFile() {
-    if(file.Save(name)) {
-        cout << "Data saved to file." <<endl;
-    } else {
-        cout << "Saving to file failed." <<endl;
-    }
-}
 int TransactionsFile::extractLastTransactionId(){
     int lastId = 0;
     file.FindElem("Transactions");

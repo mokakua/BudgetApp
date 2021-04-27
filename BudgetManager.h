@@ -8,19 +8,13 @@ using namespace std;
 
 class BudgetManager {
     UserManager userManager;
-    TransactionManager *transactionManager;
-    const string NAME_OF_USERS_FILE;
     const string NAME_OF_INCOMES_FILE;
     const string NAME_OF_EXPENSES_FILE;
+    TransactionManager *transactionManager;
 
     char enterCharacter();
     void chooseStartOption(char choice);
     void chooseMainOption(char choice);
-
-public:
-    BudgetManager(string usersFileName, string incomesFileName, string expensesFileName);
-    ~BudgetManager();
-    void showMenu();
     void showStartMenu();
     void logIn();
     void registerUser();
@@ -32,6 +26,13 @@ public:
     void showCustomMonthStatement();
     void changePassword();
     void logOut();
+    void waitForResponse();
+
+public:
+    BudgetManager(string usersFileName, string incomesFileName, string expensesFileName);
+    ~BudgetManager();
+    void showMenu();
+
 };
 
 #endif // BUDGETMANAGER_H

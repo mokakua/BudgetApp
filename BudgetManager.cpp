@@ -5,7 +5,7 @@
 #include <conio.h>
 
 BudgetManager::BudgetManager(string usersFileName, string incomesFileName, string expensesFileName):
-    userManager(usersFileName), NAME_OF_INCOMES_FILE(incomesFileName), NAME_OF_EXPENSES_FILE(expensesFileName) {
+    userManager(usersFileName), NAME_OF_INCOMES_FILE(incomesFileName), NAME_OF_EXPENSES_FILE(expensesFileName){
     transactionManager = NULL;
 }
 
@@ -35,8 +35,8 @@ void BudgetManager::showStartMenu() {
 
 void BudgetManager::showMainMenu() {
     system("cls");
-    cout << "User id: " << userManager.getIdOfLoggedInUser() <<endl;
-    cout << "It's your Budget Manager"          <<endl;
+    userManager.welcomeLoggedInUser();
+    cout << "It's your Budget Manager"          <<endl <<endl;
     cout << "1. Add income."                    <<endl;
     cout << "2. Add expense."                   <<endl;
     cout << "3. Show current month balance."    <<endl;
@@ -69,7 +69,6 @@ void BudgetManager::chooseStartOption(char choice) {
     }
     default: {
         cout << "Input invalid" <<endl;
-        getch();
     }
     break;
     }
@@ -108,10 +107,10 @@ void BudgetManager::chooseMainOption(char choice) {
     break;
     default: {
         cout << "Input invalid" <<endl;
-        getch();
     }
     break;
     }
+    waitForResponse();
 }
 
 void BudgetManager::logIn() {
@@ -152,4 +151,10 @@ void BudgetManager::changePassword() {
 void BudgetManager::logOut() {
     userManager.logOut();
     delete transactionManager;
+}
+
+void BudgetManager::waitForResponse(){
+    cout << "Press any key to continue...";
+    getch();
+    return;
 }

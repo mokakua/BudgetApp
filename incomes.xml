@@ -104,4 +104,18 @@
 <date>2021-03-01</date>
 <value>100.000000</value>
 </Transaction>
+<Transaction>
+<userId>10</userId>
+<transactionId>16</transactionId>
+<item>bla bla</item>
+<date>2021-04-13</date>
+<value>120.000000</value>
+</Transaction>
+<Transaction>
+<userId>10</userId>
+<transactionId>17</transactionId>
+<item>bla bla 2</item>
+<date>2021-04-05</date>
+<value>500.999000</value>
+</Transaction>
 </Transactions>

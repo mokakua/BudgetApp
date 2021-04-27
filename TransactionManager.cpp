@@ -23,9 +23,11 @@ void TransactionManager::addIncome() {
     Transaction transaction = enterTransactionData();
     transaction.setTransactionId(incomesFile.getLastTransactionId()+1);
     incomes.push_back(transaction);
-    incomesFile.addTransactionToFile(transaction);
-    incomesFile.saveFile();
-    getchar();
+    if (incomesFile.addTransactionToFile(transaction)){
+        cout << "Income successfully added." <<endl;
+    }else{
+        cout << "Operation failed." <<endl;
+    }
 }
 
 void TransactionManager::addExpense() {
@@ -33,9 +35,11 @@ void TransactionManager::addExpense() {
     Transaction transaction = enterTransactionData();
     transaction.setTransactionId(expensesFile.getLastTransactionId()+1);
     expenses.push_back(transaction);
-    expensesFile.addTransactionToFile(transaction);
-    expensesFile.saveFile();
-    getchar();
+    if (expensesFile.addTransactionToFile(transaction)){
+        cout << "Expense successfully added." <<endl;
+    }else{
+        cout << "Operation failed." <<endl;
+    }
 }
 
 Transaction TransactionManager::enterTransactionData() {
