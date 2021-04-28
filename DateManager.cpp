@@ -5,6 +5,7 @@
 #include <sstream>
 #include <time.h>
 #include <algorithm>
+#include <conio.h>
 
 bool DateManager::isUserInputCorrect(string userInput) {
     if(isFormatCorrect(userInput) && areValuesCorrect(userInput)) {
@@ -143,6 +144,14 @@ string DateManager::getStringDateFromInt(int dateAsInt) {
     return dateAsString;
 }
 
+string DateManager::getTodayStringDate(){
+    string today;
+    time_t now = time(NULL);
+    struct tm dateComponents = *localtime(&now);
+    today = getStringDateFromInt(getIntDateFromStruct(dateComponents));
+    return today;
+}
+
 TimePeriod DateManager::getCurrentMonthPeriod() {
     TimePeriod currentMonth;
     time_t now = time(NULL);
@@ -189,14 +198,52 @@ TimePeriod DateManager::enterTimePeriod() {
 string DateManager::enterDate() {
     string dateAsString = "";
     while(true) {
-        cout << "Enter date (yyyy-mm-dd): ";
-        getline(cin,dateAsString);
+        cout << "Enter date: ";
+        dateAsString = dateFormatSetter();
+        //getline(cin,dateAsString);
         if (isUserInputCorrect(dateAsString)){
             break;
         }
         cout << "Try again" <<endl;
     }
     return dateAsString;
+}
+
+string DateManager::dateFormatSetter () {
+    string currentDate = getTodayStringDate();
+    string date = currentDate;
+    string format = "yyyy-mm-dd";
+    size_t formatLength = format.length();
+    enum specialCharacters {backspace = 8, enter = 13, esc = 27};
+    char input = 0;
+    cout << date;
+    while(input != enter) {
+        input = getch();
+        if(input == backspace && !date.empty()) {
+            if (date.back() == '-') {
+                date.pop_back();
+                cout << "\b-\b";
+            }
+            date.pop_back();
+            cout << '\b' << format[date.length()] << '\b';
+
+        } else if (isdigit(input) && date.length()<formatLength) {
+            date.push_back(input);
+            cout << input;
+            if(format[date.length()] == '-') {
+                date.push_back('-');
+                cout << '-';
+            }
+        } else if (input == esc){
+            string removeCurrentInput = "";
+            removeCurrentInput.append(date.length(),'\b');
+            cout << removeCurrentInput;
+            date = currentDate;
+            cout << date;
+        }
+    }
+    cout << endl;
+    return date;
 }
 
 bool DateManager::isDateInPeriod(int dateAsInt, TimePeriod period) {

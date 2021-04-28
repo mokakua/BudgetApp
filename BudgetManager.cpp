@@ -5,7 +5,7 @@
 #include <conio.h>
 
 BudgetManager::BudgetManager(string usersFileName, string incomesFileName, string expensesFileName):
-    userManager(usersFileName), NAME_OF_INCOMES_FILE(incomesFileName), NAME_OF_EXPENSES_FILE(expensesFileName){
+    userManager(usersFileName), NAME_OF_INCOMES_FILE(incomesFileName), NAME_OF_EXPENSES_FILE(expensesFileName) {
     transactionManager = NULL;
 }
 
@@ -27,10 +27,10 @@ void BudgetManager::showMenu() {
 
 void BudgetManager::showStartMenu() {
     system("cls");
-    cout << "It's your Budget Manager"  <<endl;
+    cout << "It's your Budget Manager"  <<endl <<endl;
     cout << "1. Log in"                 <<endl;
     cout << "2. Register"               <<endl;
-    cout << "9. Exit"                   <<endl;
+    cout << "9. Exit"                   <<endl <<endl;
 }
 
 void BudgetManager::showMainMenu() {
@@ -43,7 +43,7 @@ void BudgetManager::showMainMenu() {
     cout << "4. Show last month balance."       <<endl;
     cout << "5. Show custom period balance."    <<endl;
     cout << "6. Change password."               <<endl;
-    cout << "9. Log out"                        <<endl;
+    cout << "9. Log out"                        <<endl <<endl;
 }
 
 char BudgetManager::enterCharacter() {
@@ -68,7 +68,8 @@ void BudgetManager::chooseStartOption(char choice) {
         exit(0);
     }
     default: {
-        cout << "Input invalid" <<endl;
+        cout << "Invalid input " <<endl;
+        Sleep(500);
     }
     break;
     }
@@ -103,19 +104,30 @@ void BudgetManager::chooseMainOption(char choice) {
     break;
     case '9': {
         logOut();
+        animateMessage("Logging out...");
+        return;
     }
     break;
     default: {
-        cout << "Input invalid" <<endl;
+        cout << "Invalid input " <<endl;
+        Sleep(500);
+        return;
     }
     break;
     }
     waitForResponse();
 }
-
+void BudgetManager::animateMessage(string message) {
+    size_t letters = message.length();
+    for(size_t i = 0; i<=letters; i++) {
+        cout << message[i];
+        Sleep(50);
+    }
+    Sleep(500);
+}
 void BudgetManager::logIn() {
     userManager.logIn();
-    if (userManager.getIdOfLoggedInUser()!=0){
+    if (userManager.getIdOfLoggedInUser()!=0) {
         transactionManager = new TransactionManager(userManager.getIdOfLoggedInUser(), NAME_OF_INCOMES_FILE, NAME_OF_EXPENSES_FILE);
     }
 }
@@ -153,7 +165,7 @@ void BudgetManager::logOut() {
     delete transactionManager;
 }
 
-void BudgetManager::waitForResponse(){
+void BudgetManager::waitForResponse() {
     cout << "Press any key to continue...";
     getch();
     return;

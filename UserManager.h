@@ -14,7 +14,7 @@ class UserManager {
     UsersFile usersFile;
 
     string enterUserData(string inputName);
-    string enterPassword();
+    string enterMaskedPassword();
     void addUserToFile(const User& user);
     void changeUserData(const User& user);
     int getIdOfNewUser();

@@ -27,6 +27,7 @@ class BudgetManager {
     void changePassword();
     void logOut();
     void waitForResponse();
+    void animateMessage(string message);
 
 public:
     BudgetManager(string usersFileName, string incomesFileName, string expensesFileName);

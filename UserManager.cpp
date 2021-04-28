@@ -17,10 +17,10 @@ string UserManager::convertFirstToUpperOtherToLower(string input) {
 
 string UserManager::enterUserData(string inputName) {
     string input = "";
-    while (input == "") {
+    while (input.empty()) {
         cout << "Enter user " << inputName << ": ";
         if (inputName == "password") {
-            input = enterPassword();
+            input = enterMaskedPassword();
             continue;
         }
         getline(cin,input);
@@ -31,13 +31,12 @@ string UserManager::enterUserData(string inputName) {
                 input = "";
                 continue;
             }
-
         }
     }
     return input;
 }
 
-string UserManager::enterPassword() {
+string UserManager::enterMaskedPassword() {
     string password = "";
     char character = 0;
     enum specialCharacters {backspace = 8, enter = 13, esc = 27};
@@ -45,7 +44,7 @@ string UserManager::enterPassword() {
         character = getch();
         switch(character) {
         case backspace: {
-            if(password.length()>0) {
+            if(!password.empty()) {
                 password.pop_back();
                 cout << "\b \b";
             }
@@ -122,7 +121,7 @@ void UserManager::logIn() {
     string validPassword = getUserByLogin(login)->getPassword();
     for (int attempts = 3; attempts>0; attempts--) {
         cout << "Password: ";
-        password = enterPassword();
+        password = enterMaskedPassword();
         if (password == validPassword) {
             idOfLoggedInUser = getUserByLogin(login)->getId();
             return;
@@ -143,14 +142,17 @@ void UserManager::changePassword() {
     string repeatedPassword = "";
     auto user = getLoggedInUser();
     while (true) {
-        cout << "Enter new password: ";
-        newPassword = enterPassword();
+        while(newPassword.empty()) {
+            cout << "Enter new password: ";
+            newPassword = enterMaskedPassword();
+        }
         cout << "Repeat password: ";
-        repeatedPassword = enterPassword();
+        repeatedPassword = enterMaskedPassword();
         if(newPassword == repeatedPassword) {
             break;
         }
         cout << "Passwords do not match. Try again" <<endl <<endl;
+        newPassword.clear();
     }
     user->setPassword(newPassword);
     changeUserData(*user);
@@ -170,22 +172,21 @@ void UserManager::loadUsersFromFile() {
 
 void UserManager::addUserToFile(const User& user) {
     system("cls");
-    if (usersFile.addUserToFile(user)){
+    if (usersFile.addUserToFile(user)) {
         cout << "User successfully registred." <<endl;
-    }else{
+    } else {
         cout << "Operation failed." <<endl;
     }
     Sleep(1500);
 }
 
-void UserManager::changeUserData(const User& user){
+void UserManager::changeUserData(const User& user) {
     system("cls");
-    if (usersFile.changeUserData(user)){
+    if (usersFile.changeUserData(user)) {
         cout << "Password successfully changed." <<endl;
-    }else{
+    } else {
         cout << "Operation failed." <<endl;
     }
-    Sleep(1500);
 }
 
 int UserManager::getIdOfNewUser() {

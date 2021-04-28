@@ -118,4 +118,18 @@
 <date>2021-04-05</date>
 <value>500.999000</value>
 </Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>18</transactionId>
+<item>Test daty</item>
+<date>2021-04-28</date>
+<value>120.200000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>19</transactionId>
+<item>Test daty 2</item>
+<date>2021-04-28</date>
+<value>123.123000</value>
+</Transaction>
 </Transactions>

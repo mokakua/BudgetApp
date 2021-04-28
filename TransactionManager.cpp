@@ -9,7 +9,6 @@
 
 TransactionManager::TransactionManager(int id, const string& NAME_OF_INCOMES_FILE, const string& NAME_OF_EXPENSES_FILE):
     incomesFile(NAME_OF_INCOMES_FILE), expensesFile(NAME_OF_EXPENSES_FILE), userId(id), MESSAGE_LENGTH(40) {
-
     loadUserTransactionsFromFile();
 }
 
@@ -97,8 +96,8 @@ bool TransactionManager::isValueFormatCorrect(string &input) {
 }
 
 void TransactionManager::listTransactionsFromPeriod(const vector <Transaction>& periodicIncomes, const vector <Transaction>& periodicExpenses, const TimePeriod& period){
-    cout << "Statement from " << DateManager::getStringDateFromInt(period.getFirstDay());
-    cout << " to " << DateManager::getStringDateFromInt(period.getLastDay()) <<endl;
+    cout << "Statement from "   << DateManager::getStringDateFromInt(period.getFirstDay());
+    cout << " to "              << DateManager::getStringDateFromInt(period.getLastDay()) <<endl <<endl;
     cout << setprecision(2) << std::fixed;
     cout << "***INCOMES***:" <<endl;
     listTransactions(periodicIncomes);
@@ -176,7 +175,6 @@ void TransactionManager::showPeriodStatement(const TimePeriod& period) {
     sortTransactionsToLatest(expensesFromPeriod);
     listTransactionsFromPeriod(incomesFromPeriod, expensesFromPeriod, period);
     showBalanceOfTransactions(incomesFromPeriod, expensesFromPeriod);
-    getchar();
 }
 
 void TransactionManager::showCurrentMonthStatement(){
@@ -191,6 +189,7 @@ void TransactionManager::showPreviousMonthStatement() {
 
 void TransactionManager::showCustomPeriodStatement() {
     TimePeriod period= DateManager::enterTimePeriod();
+    system("cls");
     showPeriodStatement(period);
 }
 
