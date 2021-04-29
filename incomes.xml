@@ -25,7 +25,7 @@
 <transactionId>4</transactionId>
 <userId>1</userId>
 <date>2020-05-09</date>
-<value>200</value>
+<value>200.000000</value>
 </Transaction>
 <Transaction>
 <item>item 1</item>
@@ -116,7 +116,7 @@
 <transactionId>17</transactionId>
 <item>bla bla 2</item>
 <date>2021-04-05</date>
-<value>500.999000</value>
+<value>500.990000</value>
 </Transaction>
 <Transaction>
 <userId>1</userId>
@@ -131,5 +131,12 @@
 <item>Test daty 2</item>
 <date>2021-04-28</date>
 <value>123.123000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>20</transactionId>
+<item>probne</item>
+<date>2021-04-29</date>
+<value>120.990000</value>
 </Transaction>
 </Transactions>

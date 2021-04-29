@@ -15,7 +15,7 @@ void Transaction::setUserId(int userId) {
 void Transaction::setDate (int date) {
     this->date = date;
 }
-void Transaction::setValue (double value) {
+void Transaction::setValue (float value) {
     this->value = value;
 }
 
@@ -33,6 +33,6 @@ int Transaction::getUserId() const {
 int Transaction::getDate() const {
     return this->date;
 }
-double Transaction::getValue() const {
+float Transaction::getValue() const {
     return this-> value;
 }

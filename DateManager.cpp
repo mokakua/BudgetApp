@@ -190,6 +190,7 @@ TimePeriod DateManager::enterTimePeriod() {
     cout << "Set time period:" <<endl;
     cout << "FROM" <<endl;
     period.setFirstDay(getIntDateFromString(enterDate()));
+    cout << endl;
     cout << "TO" <<endl;
     period.setLastDay(getIntDateFromString(enterDate()));
     return period;
@@ -200,7 +201,6 @@ string DateManager::enterDate() {
     while(true) {
         cout << "Enter date: ";
         dateAsString = dateFormatSetter();
-        //getline(cin,dateAsString);
         if (isUserInputCorrect(dateAsString)){
             break;
         }

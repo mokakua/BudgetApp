@@ -50,7 +50,6 @@ char BudgetManager::enterCharacter() {
     char character = 0;
     cout << "Enter the number." <<endl;
     character = getch();
-    cout << endl;
     return character;
 }
 void BudgetManager::chooseStartOption(char choice) {

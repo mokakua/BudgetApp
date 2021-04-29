@@ -18,14 +18,14 @@
 <transactionId>3</transactionId>
 <userId>1</userId>
 <date>2021-04-15</date>
-<value>190.990005</value>
+<value>190.990000</value>
 </Transaction>
 <Transaction>
 <item>Bike</item>
 <transactionId>4</transactionId>
 <userId>1</userId>
 <date>2020-05-01</date>
-<value>4999.990234</value>
+<value>4999.990000</value>
 </Transaction>
 <Transaction>
 <userId>1</userId>
@@ -53,7 +53,7 @@
 <transactionId>8</transactionId>
 <item>compare</item>
 <date>2021-04-21</date>
-<value>132.123655</value>
+<value>132.120000</value>
 </Transaction>
 <Transaction>
 <userId>9</userId>
@@ -61,5 +61,33 @@
 <item>Karma</item>
 <date>2021-03-05</date>
 <value>20.990000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>10</transactionId>
+<item>test value settera1</item>
+<date>2021-04-29</date>
+<value>0.000000</value>
+</Transaction>
+<Transaction>
+<userId>10</userId>
+<transactionId>11</transactionId>
+<item>test value setter</item>
+<date>2021-04-29</date>
+<value>123.000000</value>
+</Transaction>
+<Transaction>
+<userId>10</userId>
+<transactionId>12</transactionId>
+<item>test value again</item>
+<date>2021-04-29</date>
+<value>120.980000</value>
+</Transaction>
+<Transaction>
+<userId>10</userId>
+<transactionId>13</transactionId>
+<item>sakljd</item>
+<date>2021-04-29</date>
+<value>0.120000</value>
 </Transaction>
 </Transactions>

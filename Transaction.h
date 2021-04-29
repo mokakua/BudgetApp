@@ -9,7 +9,7 @@ class Transaction {
     int transactionId, userId;
     int date;
     string item;
-    double value;
+    float value;
 
 public:
 
@@ -18,13 +18,13 @@ public:
     void setUserId (int userId);
     void setDate (int date);
     void setItem (string item);
-    void setValue (double value);
+    void setValue (float value);
 
     int getTransactionId() const;
     int getUserId() const;
     int getDate() const;
     string getItem() const;
-    double getValue() const;
+    float getValue() const;
 
 };
 #endif // TRANSACTION_H

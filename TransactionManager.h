@@ -20,18 +20,19 @@ class TransactionManager {
 
     Transaction enterTransactionData();
     string askForItem();
-    double askForValue();
+    float askForValue();
     int askForDate();
     bool isValueFormatCorrect(string &input);
     void listTransactions(vector <Transaction> transactions);
     string showInfo(string info);
     bool isTransactionLaterThan (const Transaction& trans1, const Transaction& trans2);
+    string setValueFormat();
 
 
     vector <Transaction> selectTransactionsFromPeriod(const TimePeriod& period, const vector <Transaction>& transactions);
     void listTransactionsFromPeriod(const vector <Transaction>& periodicIncomes, const vector <Transaction>& periodicExpenses, const TimePeriod& period);
     void sortTransactionsToLatest(vector <Transaction>& transactions);
-    double sumOfTransactions(const vector <Transaction>& transactions);
+    float sumOfTransactions(const vector <Transaction>& transactions);
     void showBalanceOfTransactions(const vector <Transaction>& incomes, const vector <Transaction>& expenses);
     void showPeriodStatement(const TimePeriod& period);
 
