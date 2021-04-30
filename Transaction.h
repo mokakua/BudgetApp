@@ -14,11 +14,11 @@ class Transaction {
 public:
 
     bool operator<(Transaction transaction2);
-    void setTransactionId (int transId);
-    void setUserId (int userId);
-    void setDate (int date);
-    void setItem (string item);
-    void setValue (float value);
+    void setTransactionId(int transId);
+    void setUserId(int userId);
+    void setDate(int date);
+    void setItem(string item);
+    void setValue(float value);
 
     int getTransactionId() const;
     int getUserId() const;

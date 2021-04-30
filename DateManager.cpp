@@ -176,13 +176,19 @@ TimePeriod DateManager::getPreviousMonthPeriod() {
 }
 
 TimePeriod DateManager::enterTimePeriod() {
+    int firstDateInput, secondDateInput;
     TimePeriod period;
     cout << "Set time period:" <<endl;
     cout << "FROM" <<endl;
-    period.setFirstDay(getIntDateFromString(enterDate()));
+    firstDateInput = getIntDateFromString(enterDate());
     cout << endl;
     cout << "TO" <<endl;
-    period.setLastDay(getIntDateFromString(enterDate()));
+    secondDateInput = getIntDateFromString(enterDate());
+    if (firstDateInput > secondDateInput){
+        swap(firstDateInput,secondDateInput);
+    }
+    period.setFirstDay(firstDateInput);
+    period.setLastDay(secondDateInput);
     return period;
 }
 

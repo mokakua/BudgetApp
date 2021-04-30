@@ -66,7 +66,7 @@ float TransactionManager::askForValue() {
         cout << "Enter transaction's value [PLN]: ";
         input = setValueFormat();
         cout << endl;
-    } while (input!="");
+    } while (input.empty());
     float value = atof(input.c_str());
     return value;
 }

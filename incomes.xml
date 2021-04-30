@@ -139,4 +139,11 @@
 <date>2021-04-29</date>
 <value>120.990000</value>
 </Transaction>
+<Transaction>
+<userId>11</userId>
+<transactionId>21</transactionId>
+<item>First income</item>
+<date>2021-04-30</date>
+<value>120.989998</value>
+</Transaction>
 </Transactions>
