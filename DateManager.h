@@ -18,7 +18,7 @@ class DateManager {
     static int getMonthFromIntDate(int dateAsInt);
     static int getDayFromIntDate(int dateAsInt);
     static string convertIntToString (int number);
-    static string dateFormatSetter();
+    static string setDateFormat();
     static string getTodayStringDate();
 
 public:
@@ -26,7 +26,6 @@ public:
     static bool isUserInputCorrect(string userInput);
     static int getIntDateFromString(string dateAsString);
     static string getStringDateFromInt(int dateAsInt);
-    static bool isDateInPeriod(int dateAsInt, TimePeriod period);
     static TimePeriod getCurrentMonthPeriod();
     static TimePeriod getPreviousMonthPeriod();
     static TimePeriod enterTimePeriod();

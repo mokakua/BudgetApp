@@ -48,7 +48,7 @@ void BudgetManager::showMainMenu() {
 
 char BudgetManager::enterCharacter() {
     char character = 0;
-    cout << "Enter the number." <<endl;
+    cout << "Enter the number.";
     character = getch();
     return character;
 }

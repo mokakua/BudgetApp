@@ -23,6 +23,8 @@ class UserManager {
     vector <User>::iterator getLoggedInUser();
     string convertFirstToUpperOtherToLower(string input);
     void loadUsersFromFile();
+    bool areCredentialsCorrect(string login, string password);
+    void waitPenaltyTime(int seconds);
 
 public:
 
@@ -33,10 +35,5 @@ public:
     void logOut();
     int getIdOfLoggedInUser();
     void welcomeLoggedInUser();
-
-    void listUsers(); //dev
-
-
-
 };
 #endif // USERMANAGER_H

@@ -3,7 +3,3 @@
 XMLFile::XMLFile(string name)
     :name(name) {
 }
-
-bool XMLFile::isFileEmpty() {
-
-}

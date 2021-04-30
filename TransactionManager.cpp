@@ -56,7 +56,7 @@ string TransactionManager::askForItem() {
     do {
         cout << "Enter transaction's info (up to " << MESSAGE_LENGTH << " chars): ";
         getline(cin,info);
-    } while (info.length() > MESSAGE_LENGTH || info.length() < 1);
+    } while (info.length() > MESSAGE_LENGTH || info.empty());
     return info;
 }
 
@@ -189,10 +189,10 @@ void TransactionManager::showBalanceOfTransactions(const vector <Transaction>& i
     float incomesTotal=0, expensesTotal=0;
     incomesTotal = sumOfTransactions(incomes);
     expensesTotal = sumOfTransactions(expenses);
-    cout << "***TOTAL***"                                   <<endl  <<endl;
-    cout << "INCOMES\t"  << incomesTotal                    << "zl" <<endl;
-    cout << "OUTCOMES\t" << expensesTotal                   << "zl" <<endl;
-    cout << "BALANCE\t"  << incomesTotal - expensesTotal    << "zl" <<endl <<endl;
+    cout << "***TOTAL***"                                       <<endl  <<endl;
+    cout << "INCOMES \t"    << incomesTotal                     << "zl" <<endl;
+    cout << "OUTCOMES\t"    << expensesTotal                    << "zl" <<endl;
+    cout << "BALANCE \t"    << incomesTotal - expensesTotal     << "zl" <<endl <<endl;
 }
 
 
@@ -220,14 +220,4 @@ void TransactionManager::showCustomPeriodStatement() {
     TimePeriod period= DateManager::enterTimePeriod();
     system("cls");
     showPeriodStatement(period);
-}
-
-void TransactionManager::listAllUsersTransactions() {
-    cout << setprecision(2) << std::fixed;
-    cout << "All incomes:" <<endl;
-    listTransactions(incomes);
-    cout << endl;
-    cout << "All expenses:" <<endl;
-    listTransactions(expenses);
-    cout << endl;
 }
