@@ -10,8 +10,6 @@ protected:
     string name;
     CMarkup file;
 
-    bool isFileEmpty();
-
 public:
 
     XMLFile(string name);

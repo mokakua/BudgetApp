@@ -19,16 +19,14 @@ class TransactionManager {
     const size_t MESSAGE_LENGTH;
 
     Transaction enterTransactionData();
+    void loadUserTransactionsFromFile();
     string askForItem();
     float askForValue();
     int askForDate();
-    bool isValueFormatCorrect(string &input);
     void listTransactions(vector <Transaction> transactions);
     string showInfo(string info);
     bool isTransactionLaterThan (const Transaction& trans1, const Transaction& trans2);
     string setValueFormat();
-
-
     vector <Transaction> selectTransactionsFromPeriod(const TimePeriod& period, const vector <Transaction>& transactions);
     void listTransactionsFromPeriod(const vector <Transaction>& periodicIncomes, const vector <Transaction>& periodicExpenses, const TimePeriod& period);
     void sortTransactionsToLatest(vector <Transaction>& transactions);
@@ -44,9 +42,5 @@ public:
     void showCurrentMonthStatement();
     void showPreviousMonthStatement();
     void showCustomPeriodStatement();
-    void loadUserTransactionsFromFile();
-
-    void listAllUsersTransactions();
-
 };
 #endif // TRANSACTIONMANAGER_H

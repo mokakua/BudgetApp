@@ -11,7 +11,7 @@ UserManager::UserManager(const string& usersFileName):
 
 string UserManager::convertFirstToUpperOtherToLower(string input) {
     transform(input.begin(), input.end(), input.begin(), ::tolower);
-    toupper(input[0]);
+    input [0] = toupper(input[0]);
     return input;
 }
 
@@ -58,8 +58,10 @@ string UserManager::enterMaskedPassword() {
         case esc:
             break;
         default: {
-            password.push_back(character);
-            cout << '*';
+            if (isalnum(character)) {
+                password.push_back(character);
+                cout << '*';
+            }
         }
         }
     }
@@ -108,33 +110,43 @@ vector <User>::iterator UserManager::getLoggedInUser() {
 void UserManager::logIn() {
     string login = "";
     string password = "";
-    cout << "*** LOG IN ***" <<endl;
-    while (true) {
+    cout << "*** LOG IN ***" <<endl <<endl;
+    for (int attempts = 3; attempts>0; attempts--) {
+
         cout << "Login: ";
         getline(cin,login);
-        transform(login.begin(), login.end(), login.begin(), ::tolower);
-        if (getUserByLogin(login)!=users.end()) {
-            break;
-        }
-        cout << "Login does not exist." <<endl;
-    }
-    string validPassword = getUserByLogin(login)->getPassword();
-    for (int attempts = 3; attempts>0; attempts--) {
         cout << "Password: ";
         password = enterMaskedPassword();
-        if (password == validPassword) {
+
+        if (areCredentialsCorrect(login, password)) {
             idOfLoggedInUser = getUserByLogin(login)->getId();
             return;
         }
-        cout << "Password is not correct. Please try again." <<endl;
-        cout << "Attempts left: " << attempts-1 <<endl;
-    }
-    for (int time = 3; time > 0; time--) {
         system("cls");
-        cout << "Operation failed. Penalty time: " << time << "s" <<endl;
+        cout << "Login or password is invalid."                     <<endl;
+        cout << "Please try again. Attempts left: " << attempts-1   <<endl <<endl;
+    }
+    waitPenaltyTime(3);
+}
+
+bool UserManager::areCredentialsCorrect(string login, string password) {
+    transform(login.begin(), login.end(), login.begin(), ::tolower);
+    if (getUserByLogin(login)==users.end()) {
+        return false;
+    }
+    string validPassword = getUserByLogin(login)->getPassword();
+    if (password != validPassword) {
+        return false;
+    }
+    return true;
+}
+
+void UserManager::waitPenaltyTime(int seconds) {
+    for (; seconds > 0; seconds--) {
+        system("cls");
+        cout << "Operation failed. Penalty time: " << seconds << "s" <<endl;
         Sleep(1000);
     }
-
 }
 
 void UserManager::changePassword() {
@@ -173,7 +185,7 @@ void UserManager::loadUsersFromFile() {
 void UserManager::addUserToFile(const User& user) {
     system("cls");
     if (usersFile.addUserToFile(user)) {
-        cout << "User successfully registred." <<endl;
+        cout << "User successfully registered." <<endl;
     } else {
         cout << "Operation failed." <<endl;
     }
@@ -203,17 +215,6 @@ bool UserManager::doesLoginExists(string loginInput) {
         return true;
     }
     return false;
-}
-
-void UserManager::listUsers() {
-    vector <User>::iterator iter = users.begin(), end = users.end();
-    for(; iter!=end; iter++) {
-        cout << iter->getName() <<endl;
-        cout << iter->getSurname() <<endl;
-        cout << iter->getLogin() <<endl;
-        cout << iter->getPassword() <<endl;
-        cout << iter->getId() <<endl <<endl;
-    }
 }
 
 void UserManager::welcomeLoggedInUser() {

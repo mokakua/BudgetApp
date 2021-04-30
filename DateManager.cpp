@@ -1,7 +1,4 @@
 #include "DateManager.h"
-#include "Markup.h"
-#include <cstdlib>
-#include <string>
 #include <sstream>
 #include <time.h>
 #include <algorithm>
@@ -17,15 +14,8 @@ bool DateManager::isUserInputCorrect(string userInput) {
 bool DateManager::isFormatCorrect(string dateAsString) {
     int inputLength = dateAsString.length();
     if (inputLength != 10) {
-        cout << "Invalid format" <<endl;
+        cout << "Invalid format. ";
         return false;
-    }
-    for (int i = 0; i<inputLength; i++) {
-        if (!isdigit(dateAsString[i]) && i!=4 && i!=7) {
-            return false;
-        } else if (dateAsString[i] != '-' && (i==4 || i==7)) {
-            return false;
-        }
     }
     return true;
 }
@@ -38,15 +28,15 @@ bool DateManager::areValuesCorrect(string dateAsString) {
     day     = getDayFromIntDate(dateAsInt);
 
     if (month<1 || month >12) {
-        cout << "Month is out of range" <<endl;
+        cout << "Month is out of range. ";
         return false;
 
     } else if (day < 1 || day > howManyDaysInMonth(dateAsInt)) {
-        cout << "Days are out of range" <<endl;
+        cout << "Days are out of range. ";
         return false;
 
     } else if ((year<2000) || dateAsInt > getCurrentMonthPeriod().getLastDay()) {
-        cout << "Time is out of range" <<endl;
+        cout << "Time is out of range. ";
         return false;
     }
     return true;
@@ -172,8 +162,8 @@ TimePeriod DateManager::getPreviousMonthPeriod() {
     TimePeriod previousMonth;
     time_t now = time(NULL);
     struct tm dateComponents = *localtime(&now);
-    dateComponents.tm_mon-=1;
 
+    dateComponents.tm_mon-=1;
     dateComponents.tm_mday=1;
     mktime(&dateComponents);
     previousMonth.setFirstDay(getIntDateFromStruct(dateComponents));
@@ -200,16 +190,16 @@ string DateManager::enterDate() {
     string dateAsString = "";
     while(true) {
         cout << "Enter date: ";
-        dateAsString = dateFormatSetter();
+        dateAsString = setDateFormat();
         if (isUserInputCorrect(dateAsString)){
             break;
         }
-        cout << "Try again" <<endl;
+        cout << "Try again." <<endl <<endl;
     }
     return dateAsString;
 }
 
-string DateManager::dateFormatSetter () {
+string DateManager::setDateFormat () {
     string currentDate = getTodayStringDate();
     string date = currentDate;
     string format = "yyyy-mm-dd";
@@ -244,11 +234,4 @@ string DateManager::dateFormatSetter () {
     }
     cout << endl;
     return date;
-}
-
-bool DateManager::isDateInPeriod(int dateAsInt, TimePeriod period) {
-    if (period.getFirstDay()<=dateAsInt && dateAsInt <= period.getLastDay()) {
-        return true;
-    }
-    return false;
 }
