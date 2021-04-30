@@ -90,4 +90,18 @@
 <date>2021-04-29</date>
 <value>0.120000</value>
 </Transaction>
+<Transaction>
+<userId>11</userId>
+<transactionId>14</transactionId>
+<item>First expense</item>
+<date>2021-04-29</date>
+<value>50.299999</value>
+</Transaction>
+<Transaction>
+<userId>11</userId>
+<transactionId>14</transactionId>
+<item>Unexpected</item>
+<date>2021-04-30</date>
+<value>500.000000</value>
+</Transaction>
 </Transactions>

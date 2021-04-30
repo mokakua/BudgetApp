@@ -62,4 +62,11 @@
 <password>newbie</password>
 <id>10</id>
 </User>
+<User>
+<name>Michal</name>
+<surname>Pisarski</surname>
+<login>mokakua2</login>
+<password>haslo123</password>
+<id>11</id>
+</User>
 </Users>

@@ -73,7 +73,7 @@ void UserManager::registerUser() {
     User user;
     string data = "";
     system("cls");
-    cout << "*** REGISTER NEW USER ***" <<endl;
+    cout << "*** REGISTER NEW USER ***" <<endl <<endl;
     data = enterUserData("name");
     user.setName(convertFirstToUpperOtherToLower(data));
     data = enterUserData("surname");
