@@ -13,8 +13,7 @@ class TransactionsFile :public XMLFile {
 public:
     TransactionsFile(string name);
     vector <Transaction> loadUserTransactionsFromFile(int userId);
-    void addTransactionToFile(const Transaction& transaction);
-    void saveFile();
+    bool addTransactionToFile(const Transaction& transaction);
     int extractLastTransactionId();
     int getLastTransactionId();
 };

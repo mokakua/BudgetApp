@@ -6,9 +6,12 @@
 #include <time.h>
 #include <iomanip>
 #include <algorithm>
+#include <conio.h>
 
 TransactionManager::TransactionManager(int id, const string& NAME_OF_INCOMES_FILE, const string& NAME_OF_EXPENSES_FILE):
-    incomesFile(NAME_OF_INCOMES_FILE), expensesFile(NAME_OF_EXPENSES_FILE), userId(id), MESSAGE_LENGTH(40) {}
+    incomesFile(NAME_OF_INCOMES_FILE), expensesFile(NAME_OF_EXPENSES_FILE), userId(id), MESSAGE_LENGTH(40) {
+    loadUserTransactionsFromFile();
+}
 
 void TransactionManager::loadUserTransactionsFromFile() {
     expenses = expensesFile.loadUserTransactionsFromFile(userId);
@@ -20,8 +23,11 @@ void TransactionManager::addIncome() {
     Transaction transaction = enterTransactionData();
     transaction.setTransactionId(incomesFile.getLastTransactionId()+1);
     incomes.push_back(transaction);
-    incomesFile.addTransactionToFile(transaction);
-    incomesFile.saveFile();
+    if (incomesFile.addTransactionToFile(transaction)){
+        cout << "Income successfully added." <<endl;
+    }else{
+        cout << "Operation failed." <<endl;
+    }
 }
 
 void TransactionManager::addExpense() {
@@ -29,8 +35,11 @@ void TransactionManager::addExpense() {
     Transaction transaction = enterTransactionData();
     transaction.setTransactionId(expensesFile.getLastTransactionId()+1);
     expenses.push_back(transaction);
-    expensesFile.addTransactionToFile(transaction);
-    expensesFile.saveFile();
+    if (expensesFile.addTransactionToFile(transaction)){
+        cout << "Expense successfully added." <<endl;
+    }else{
+        cout << "Operation failed." <<endl;
+    }
 }
 
 Transaction TransactionManager::enterTransactionData() {
@@ -51,13 +60,14 @@ string TransactionManager::askForItem() {
     return info;
 }
 
-double TransactionManager::askForValue() {
+float TransactionManager::askForValue() {
     string input = "";
     do {
         cout << "Enter transaction's value [PLN]: ";
-        getline(cin,input);
-    } while (!isValueFormatCorrect(input));
-    double value = atof(input.c_str());
+        input = setValueFormat();
+        cout << endl;
+    } while (input!="");
+    float value = atof(input.c_str());
     return value;
 }
 
@@ -68,33 +78,60 @@ int TransactionManager::askForDate() {
     return date;
 }
 
-bool TransactionManager::isValueFormatCorrect(string &input) {
-    int length = input.length();
+string TransactionManager::setValueFormat(){
+    string value = "";
+    char input;
     bool separatorExist = false;
-    for (int i = 0; i<length; i++) {
-        if (isdigit(input[i])) {
-            continue;
-        } else if((input[i] == ',' || input[i] == '.') && !separatorExist) {
+    enum specialCharacters {backspace = 8, enter = 13, esc = 27};
+    int fractionParts = 0;
+    while(input != enter){
+        input = getch();
+        if (value.empty() && input == '0'){
+            cout << input;
+            value.push_back(input);
+            do{
+                input = getch();
+            }while (input != '.' && input != ',' && input != esc && input != enter && input != backspace);
+        }
+        if (!separatorExist && !value.empty() && (input == ',' || input == '.')){
+            cout << '.';
+            value.push_back('.');
             separatorExist = true;
-            if (input[i] == ',') {
-                input[i] = '.';
+        }else if (isdigit(input) && fractionParts<2){
+            if(separatorExist){
+                fractionParts++;
             }
-        } else {
-            cout << "Invalid input" <<endl;
-            return false;
+            cout << input;
+            value.push_back(input);
+        }else if (input == backspace && !value.empty()){
+            if(value.back() == '.'){
+                separatorExist = false;
+            }
+            if(separatorExist){
+                fractionParts--;
+            }
+            cout << "\b \b";
+            value.pop_back();
+        }else if (input == esc){
+            for (size_t letters = value.length(); letters > 0; letters--){
+                cout << "\b \b";
+            }
+            value.clear();
+            fractionParts = 0;
+            separatorExist = false;
         }
     }
-    return true;
+    return value;
 }
 
 void TransactionManager::listTransactionsFromPeriod(const vector <Transaction>& periodicIncomes, const vector <Transaction>& periodicExpenses, const TimePeriod& period){
-    cout << "Statement from " << DateManager::getStringDateFromInt(period.getFirstDay());
-    cout << " to " << DateManager::getStringDateFromInt(period.getLastDay()) <<endl;
+    cout << "Statement from "   << DateManager::getStringDateFromInt(period.getFirstDay());
+    cout << " to "              << DateManager::getStringDateFromInt(period.getLastDay()) <<endl <<endl;
     cout << setprecision(2) << std::fixed;
-    cout << "***INCOMES***:" <<endl;
+    cout << "***INCOMES***" <<endl <<endl;
     listTransactions(periodicIncomes);
     cout << endl;
-    cout << "***EXPENSES***:" <<endl;
+    cout << "***EXPENSES***" <<endl <<endl;
     listTransactions(periodicExpenses);
     cout << endl;
 }
@@ -139,8 +176,8 @@ vector <Transaction> TransactionManager::selectTransactionsFromPeriod(const Time
     }
     return transactionsFromPeriod;
 }
-double TransactionManager::sumOfTransactions(const vector <Transaction>& transactions){
-    double sumOfTransactions=0;
+float TransactionManager::sumOfTransactions(const vector <Transaction>& transactions){
+    float sumOfTransactions=0;
     vector <Transaction>::const_iterator trans = transactions.begin(), transEnd = transactions.end();
     for( ; trans!=transEnd ; trans++) {
             sumOfTransactions += trans->getValue();
@@ -149,13 +186,13 @@ double TransactionManager::sumOfTransactions(const vector <Transaction>& transac
 }
 
 void TransactionManager::showBalanceOfTransactions(const vector <Transaction>& incomes, const vector <Transaction>& expenses) {
-    double incomesTotal=0, expensesTotal=0;
+    float incomesTotal=0, expensesTotal=0;
     incomesTotal = sumOfTransactions(incomes);
     expensesTotal = sumOfTransactions(expenses);
-    cout << "***TOTAL***"<< endl;
-    cout << "INCOME\t"   << incomesTotal                 << endl;
-    cout << "OUTCOME\t"  << expensesTotal                << endl;
-    cout << "BALANCE\t"  << incomesTotal - expensesTotal << endl;
+    cout << "***TOTAL***"                                   <<endl  <<endl;
+    cout << "INCOMES\t"  << incomesTotal                    << "zl" <<endl;
+    cout << "OUTCOMES\t" << expensesTotal                   << "zl" <<endl;
+    cout << "BALANCE\t"  << incomesTotal - expensesTotal    << "zl" <<endl <<endl;
 }
 
 
@@ -181,6 +218,7 @@ void TransactionManager::showPreviousMonthStatement() {
 
 void TransactionManager::showCustomPeriodStatement() {
     TimePeriod period= DateManager::enterTimePeriod();
+    system("cls");
     showPeriodStatement(period);
 }
 

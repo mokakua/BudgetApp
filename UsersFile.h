@@ -9,12 +9,10 @@ using namespace std;
 
 class UsersFile :public XMLFile {
 
-
 public:
     UsersFile(string name);
     vector <User> loadUserFromFile();
-    void addUserToFile(const User& user);
-    void changeUserData(const User& user);
-    void saveFile();
+    bool addUserToFile(const User& user);
+    bool changeUserData(const User& user);
 };
 #endif // USERSFILE_H

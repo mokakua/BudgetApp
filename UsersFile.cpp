@@ -35,7 +35,7 @@ vector <User> UsersFile::loadUserFromFile() {
     return users;
 }
 
-void UsersFile::addUserToFile(const User& user) {
+bool UsersFile::addUserToFile(const User& user) {
     file.FindElem("Users");
     file.IntoElem();
     file.AddElem("User");
@@ -45,9 +45,10 @@ void UsersFile::addUserToFile(const User& user) {
     file.AddChildElem("password", user.getPassword());
     file.AddChildElem("id", user.getId());
     file.ResetPos();
+    return (file.Save(name));
 }
 
-void UsersFile::changeUserData(const User& user) {
+bool UsersFile::changeUserData(const User& user) {
     file.FindElem("Users");
     file.IntoElem();
     while(true) {
@@ -61,14 +62,8 @@ void UsersFile::changeUserData(const User& user) {
         }
     }
     file.ResetPos();
+    return (file.Save(name));
 }
 
-void UsersFile::saveFile() {
-    if(file.Save(name)) {
-        cout << "Data saved to file." <<endl;
-    } else {
-        cout << "Saving to file failed." <<endl;
-    }
-}
 
 

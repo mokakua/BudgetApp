@@ -18,6 +18,8 @@ class DateManager {
     static int getMonthFromIntDate(int dateAsInt);
     static int getDayFromIntDate(int dateAsInt);
     static string convertIntToString (int number);
+    static string dateFormatSetter();
+    static string getTodayStringDate();
 
 public:
 

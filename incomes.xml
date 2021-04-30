@@ -25,7 +25,7 @@
 <transactionId>4</transactionId>
 <userId>1</userId>
 <date>2020-05-09</date>
-<value>200</value>
+<value>200.000000</value>
 </Transaction>
 <Transaction>
 <item>item 1</item>
@@ -82,5 +82,61 @@
 <item>compare</item>
 <date>2021-04-21</date>
 <value>123.000000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>13</transactionId>
+<item>Extra job</item>
+<date>2021-04-26</date>
+<value>123.500000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>14</transactionId>
+<item>Bribe</item>
+<date>2021-04-20</date>
+<value>100.000000</value>
+</Transaction>
+<Transaction>
+<userId>9</userId>
+<transactionId>15</transactionId>
+<item>Modeling</item>
+<date>2021-03-01</date>
+<value>100.000000</value>
+</Transaction>
+<Transaction>
+<userId>10</userId>
+<transactionId>16</transactionId>
+<item>bla bla</item>
+<date>2021-04-13</date>
+<value>120.000000</value>
+</Transaction>
+<Transaction>
+<userId>10</userId>
+<transactionId>17</transactionId>
+<item>bla bla 2</item>
+<date>2021-04-05</date>
+<value>500.990000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>18</transactionId>
+<item>Test daty</item>
+<date>2021-04-28</date>
+<value>120.200000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>19</transactionId>
+<item>Test daty 2</item>
+<date>2021-04-28</date>
+<value>123.123000</value>
+</Transaction>
+<Transaction>
+<userId>1</userId>
+<transactionId>20</transactionId>
+<item>probne</item>
+<date>2021-04-29</date>
+<value>120.990000</value>
 </Transaction>
 </Transactions>
